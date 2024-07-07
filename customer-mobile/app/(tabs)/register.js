@@ -10,10 +10,12 @@ const RegisterScreen = () => {
 
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
-    const [name , setName] = useState('');
+    const [firstName , setFirstName] = useState('');
+    const [lastName , setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [address, setAddress] = useState('');
     const [gender, setGender] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
   
   
 
@@ -42,8 +44,15 @@ const RegisterScreen = () => {
         <Input
           style={styles.input}
           placeholder="First Name"
-          onChangeText={setName}
-          value={name}
+          onChangeText={setFirstName}
+          value={firstName}
+          autoCapitalize="none"
+        />
+        <Input
+          style={styles.input}
+          placeholder="First Name"
+          onChangeText={setLastName}
+          value={lastName}
           autoCapitalize="none"
         />
         <Input
@@ -52,11 +61,20 @@ const RegisterScreen = () => {
           value={email}
           autoCapitalize="none"
         />
+        
         <Input
           placeholder="address"
           onChangeText={setAddress}
           value={address}
           autoCapitalize="none"
+        />
+        <Input
+          style={styles.input}
+          placeholder="Phone Number"
+          onChangeText={setPhoneNumber}
+          value={phoneNumber}
+          autoCapitalize="none"
+          keyboardType="phone-pad"
         />
          <Text style={styles.label}>Select Gender</Text>
           <View style = {styles.pickerContainer}>
@@ -101,7 +119,8 @@ const RegisterScreen = () => {
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#E1F7F5'
+      backgroundColor: '#E1F7F5',
+      marginBottom: 100,
       
     },
     registerLinkText: {
