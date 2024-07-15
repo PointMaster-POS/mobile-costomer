@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import ShopDetail from '../(tabs)/shopdetail'
 
-export default function ShopCard({ shop }) {
+export default function ShopCard({navigation, shop}) {
 
   //when click on shopcard make navigation to shopdetail view
   const goToShopDetail = () => {
-    navigation.navigate("ShopDetail", { shopId: shop.id });
+    navigation.navigate("ShopDetail");
   };
 
   return (
