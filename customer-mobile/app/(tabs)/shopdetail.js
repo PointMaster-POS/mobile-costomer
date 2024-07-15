@@ -14,7 +14,7 @@ const shopData = {
   id: "1",
   name: "Shop A",
   description: "This is shop A description.",
-  imageUrl: "https://via.placeholder.com/150",
+  imageUrl: "https://png.pngtree.com/template/20200404/ourmid/pngtree-women-s-clothing-logo-design-image_361512.jpg",
 };
 
 const billsData = [
@@ -101,10 +101,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   loyalityContainer: {
-    marginTop: 20,
+    marginTop: 10,
     height: 200,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#C8ACD6",
     borderRadius: 8,
+    marginHorizontal: 20,
   },
   tableHeader: {
     flexDirection: 'row',
@@ -120,6 +121,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#2E236C'
   },
   shopCard: {
     flexDirection: "row",
@@ -160,7 +162,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10,
-    padding: 10
+    padding: 10,
+    color: "#2E236C",
   },
   
   billItem: {
@@ -173,6 +176,7 @@ const styles = StyleSheet.create({
   },
   billText: {
     fontSize: 16,
+    color: "#433D8B",
   },
 });
 
