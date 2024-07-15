@@ -5,7 +5,7 @@ const billDetails = [
   { id: '1', businessName: 'Store A', time: '10:00 AM', totalAmount: '$50.00' },
   { id: '2', businessName: 'Store B', time: '11:30 AM', totalAmount: '$75.00' },
   { id: '3', businessName: 'Store C', time: '1:45 PM', totalAmount: '$30.00' },
-  // Add more bill details here
+
 ];
 
 export default function BillScreen({ navigation }) {

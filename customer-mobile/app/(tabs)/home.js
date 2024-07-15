@@ -8,7 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import BillScreen from './bills';
 import ProfileScreen from './profile';
 import ShopScreen from './shops';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5Pro';
+
 
 const Tab = createBottomTabNavigator();
 
