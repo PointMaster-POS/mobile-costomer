@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import ShopBillsModal from "../components/shopbillsmodal";
+import MyAmountSpentCard from "../components/myamountspentcard";
 
 const shopData = {
   id: "1",
@@ -68,7 +69,14 @@ const ShopDetail = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={styles.loyalityContainer}></View>
+      <ScrollView style={styles.loyalityContainer}>
+        <MyAmountSpentCard
+          name={shopData.name}
+          pointRate={5}
+          minimumPoints={100}
+          pointsToRedeem={50}
+        />
+      </ScrollView>
       <View style={styles.billsContainer}>
         <Text style={styles.billsTitle}>Bills for {shopData.name}</Text>
         <View style={styles.tableHeader}>
