@@ -1,35 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 
-//dummy items component
-const itemsData = [
-  {
-    id: '1',
-    name: 'Item 1',
-    imageUrl: 'https://purepng.com/public/uploads/thumbnail//woman-dress-mdp.png',
-    priceInPoints: 100,
-  },
-  {
-    id: '2',
-    name: 'Item 2',
-    imageUrl: 'https://static.vecteezy.com/system/resources/previews/015/211/536/non_2x/blue-kids-dress-baby-girl-with-cut-out-isolated-on-background-transparent-png.png',
-    priceInPoints: 200,
-  },
-  {
-    id: '3',
-    name: 'Item 3',
-    imageUrl: 'https://pngimg.com/d/dress_PNG7.png',
-    priceInPoints: 150,
-  },
-  {
-    id: '4',
-    name: 'Item 3',
-    imageUrl: 'https://www.kindpng.com/picc/m/249-2492558_baby-party-frocks-png-pics-party-wear-baby.png',
-    priceInPoints: 150,
-  },
-];
 
-const MyAmountSpentCard = ({ name, pointRate, minimumPoints, pointsToRedeem }) => {
+
+const MyAmountSpentCard = () => {
+
+    const loyalityPorgramDetails = {
+        name : 'Shop A Amount Spent',
+        pointRate : 5,
+        minimumPoints : 100,
+        points : 50
+    }
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image style={styles.itemImage} source={{ uri: item.imageUrl }} />
@@ -37,13 +18,39 @@ const MyAmountSpentCard = ({ name, pointRate, minimumPoints, pointsToRedeem }) =
       <Text style={styles.itemPrice}>{item.priceInPoints} points</Text>
     </View>
   );
-
+//dummy items component
+const itemsData = [
+    {
+      id: '1',
+      name: 'Item 1',
+      imageUrl: 'https://purepng.com/public/uploads/thumbnail//woman-dress-mdp.png',
+      priceInPoints: 100,
+    },
+    {
+      id: '2',
+      name: 'Item 2',
+      imageUrl: 'https://static.vecteezy.com/system/resources/previews/015/211/536/non_2x/blue-kids-dress-baby-girl-with-cut-out-isolated-on-background-transparent-png.png',
+      priceInPoints: 200,
+    },
+    {
+      id: '3',
+      name: 'Item 3',
+      imageUrl: 'https://pngimg.com/d/dress_PNG7.png',
+      priceInPoints: 150,
+    },
+    {
+      id: '4',
+      name: 'Item 3',
+      imageUrl: 'https://www.kindpng.com/picc/m/249-2492558_baby-party-frocks-png-pics-party-wear-baby.png',
+      priceInPoints: 150,
+    },
+  ];
   return (
     <View style={styles.cardContainer}>
-      <Text style={styles.shopName}>{name}</Text>
-      <Text style={styles.pointRate}>Point Rate: {pointRate}</Text>
-      <Text style={styles.minimumPoints}>Minimum Points: {minimumPoints}</Text>
-      <Text style={styles.pointsToRedeem}>Points to Redeem: {pointsToRedeem}</Text>
+      <Text style={styles.shopName}>{loyalityPorgramDetails.name}</Text>
+      <Text style={styles.pointRate}>Point Rate: {loyalityPorgramDetails.pointRate}</Text>
+      <Text style={styles.minimumPoints}>Minimum Points: {loyalityPorgramDetails.minimumPoints}</Text>
+      <Text style={styles.pointsToRedeem}>Points to Redeem: {loyalityPorgramDetails.points}</Text>
       <FlatList
         data={itemsData}
         renderItem={renderItem}
