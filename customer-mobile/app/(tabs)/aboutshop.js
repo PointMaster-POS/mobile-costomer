@@ -1,4 +1,3 @@
-// AboutShop.js
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
 import LoyaltyProgramCard from '../components/loyalityprogramcard';

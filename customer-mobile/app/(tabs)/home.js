@@ -8,7 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import BillScreen from './bills';
 import ProfileScreen from './profile';
 import ShopScreen from './shops';
-
+import QRCodeView from './qrcode';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +44,7 @@ function Home () {
             style: { padding: 10, height: 70}
           }}>
   
-         
+         <Tab.Screen name={'qrcode'} component={QRCodeView} />
           <Tab.Screen name={'bills'} component={BillScreen} />
           <Tab.Screen name={'profile'} component={ProfileScreen} />
           <Tab.Screen name={'shops'} component={ShopScreen} />
