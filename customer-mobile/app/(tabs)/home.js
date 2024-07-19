@@ -10,6 +10,7 @@ import ProfileScreen from "./profile";
 import ShopScreen from "./shops";
 import QRCodeView from "./qrcodeview";
 
+//create tab navigator
 const Tab = createBottomTabNavigator();
 
 function Home() {
@@ -20,7 +21,7 @@ function Home() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let rn = route.name;
-
+          //change icon based on route name
           if (rn === "bills") {
             iconName = focused ? "credit-card-alt" : "credit-card-alt";
           } else if (rn === "profile") {
@@ -41,10 +42,11 @@ function Home() {
         style: { padding: 10, height: 70 },
       }}
     >
+      
       <Tab.Screen name={"qrcode"} component={QRCodeView} />
       <Tab.Screen name={"bills"} component={BillScreen} />
-      <Tab.Screen name={"profile"} component={ProfileScreen} />
       <Tab.Screen name={"shops"} component={ShopScreen} />
+      <Tab.Screen name={"profile"} component={ProfileScreen} />
     </Tab.Navigator>
   );
 }

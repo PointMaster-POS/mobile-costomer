@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function CustomerProfile({ navigation }) {
+    //fetch customer details from server or maybe from async storage
     const customer = {
         name: 'Himindu Kularathne',
         email: 'himindukularathne@gmail.com',
@@ -26,6 +27,14 @@ export default function CustomerProfile({ navigation }) {
                 }}>
                     <FontAwesome name='edit' size={20} color='#C8ACD6' />
                     <Text style={styles.buttonText}> Edit Profile</Text>
+                </TouchableOpacity>
+            </View>
+            <View style =  {styles.logoutContainer}>
+                <TouchableOpacity style={styles.button} onPress={() => {
+                    navigation.replace('Login');
+                }}>
+                    <FontAwesome name='sign-out' size={20} color='#C8ACD6' />
+                    <Text style={styles.buttonText}> Logout</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -80,4 +89,11 @@ const styles = StyleSheet.create({
         color: '#C8ACD6',
         fontWeight: 'bold',
     },
+    logoutContainer: {
+        flexDirection: 'row',
+        justifyContent: 'bottom',
+        alignItems: 'bottom',
+        marginTop: 20,
+    },
+
 });

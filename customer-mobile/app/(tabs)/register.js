@@ -7,7 +7,11 @@ import AuthenticateUser from "../../lib/authuser";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 const RegisterScreen = () => {
+
+  //initialize navigation
   const navigation = useNavigation();
+
+  //states to handle user input
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,23 +19,23 @@ const RegisterScreen = () => {
   const [address, setAddress] = useState("");
   const [gender, setGender] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
   const [date, setDate] = useState(new Date());
-  const [showPicker, setShowPicker] = useState(false);
 
-  const handleLogin = () => {
+
+  //function to handle register button press
+  const handledRegister = () => {
     if (AuthenticateUser({ email, password })) {
-      console.log("User authenticated");
+      console.log("User Registered");
       navigation.navigate("RegisterScreen");
     } else {
-      console.log("User not authenticated");
+      console.log("User registration failed");
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>PointMaster</Text>
-      <ScrollView style = {{height: "100%"}}>
+      <ScrollView style={{ height: "100%" }}>
         <Input
           style={styles.input}
           placeholder="First Name"
@@ -52,7 +56,6 @@ const RegisterScreen = () => {
           value={email}
           autoCapitalize="none"
         />
-
         <Input
           placeholder="address"
           onChangeText={setAddress}
@@ -81,22 +84,19 @@ const RegisterScreen = () => {
         </View>
         <Text style={styles.label}>Select Birthday</Text>
         <DateTimePicker mode="date" display="spinner" value={date} />
-        
-       
       </ScrollView>
-      <View style ={{height: 100, padding: 10}} >
-      <Button
+      <View style={{ height: 100, padding: 10 }}>
+        <Button
           title="Register"
-          onPress={handleLogin}
+          onPress={handledRegister}
           buttonStyle={styles.registerButton}
-      />
-
+        />
       </View>
-      
     </View>
   );
 };
 
+//styles for register screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#C8ACD6",
-    
   },
   registerLinkText: {
     color: "blue",

@@ -11,6 +11,7 @@ import {
 import ShopBillsModal from "../components/shopbillsmodal";
 import MyAmountSpentCard from "../components/myamountspentcard";
 
+//need to be fetch based on shop id
 const shopData = {
   id: "1",
   name: "Shop A",
@@ -19,6 +20,7 @@ const shopData = {
     "https://png.pngtree.com/template/20200404/ourmid/pngtree-women-s-clothing-logo-design-image_361512.jpg",
 };
 
+//need to fetch from server based on user id and shop id
 const billsData = [
   {
     id: "1",
@@ -41,9 +43,11 @@ const billsData = [
 ];
 
 const ShopDetail = ({ navigation }) => {
+  //states to handle bill details model
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
 
+  //function add data to rows
   const renderBillItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
@@ -60,21 +64,22 @@ const ShopDetail = ({ navigation }) => {
     </TouchableOpacity>
   );
 
-    const goToShopDetail = () => {
+  //function to navigate to shop detail page
+  const goToShopDetail = () => {
     navigation.navigate("AboutShop");
-    };
+  };
 
   return (
     <ScrollView style={styles.container}>
-    <TouchableOpacity style={styles.card} onPress={goToShopDetail}>
-      <View style={styles.shopCard}>
-        <Image style={styles.shopImage} source={{ uri: shopData.imageUrl }} />
-        <View style={styles.shopCardContent}>
-          <Text style={styles.shopName}>{shopData.name}</Text>
-          <Text style={styles.shopDescription}>{shopData.description}</Text>
+      <TouchableOpacity style={styles.card} onPress={goToShopDetail}>
+        <View style={styles.shopCard}>
+          <Image style={styles.shopImage} source={{ uri: shopData.imageUrl }} />
+          <View style={styles.shopCardContent}>
+            <Text style={styles.shopName}>{shopData.name}</Text>
+            <Text style={styles.shopDescription}>{shopData.description}</Text>
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
       <View>
         <Text style={styles.billsTitle}>My Loyality Program</Text>
       </View>
@@ -107,6 +112,7 @@ const ShopDetail = ({ navigation }) => {
   );
 };
 
+//styles for shop detail screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
