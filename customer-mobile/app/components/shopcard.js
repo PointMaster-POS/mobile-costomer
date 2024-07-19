@@ -27,7 +27,6 @@ export default function ShopCard({navigation, shop}) {
   );
 }
 
-
 //styles for shopcard
 const styles = StyleSheet.create({
   card: {

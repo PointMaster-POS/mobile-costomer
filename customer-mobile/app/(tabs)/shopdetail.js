@@ -9,12 +9,14 @@ import {
   ScrollView,
 } from "react-native";
 import ShopBillsModal from "../components/shopbillsmodal";
+import MyAmountSpentCard from "../components/myamountspentcard";
 
 const shopData = {
   id: "1",
   name: "Shop A",
   description: "This is shop A description.",
-  imageUrl: "https://png.pngtree.com/template/20200404/ourmid/pngtree-women-s-clothing-logo-design-image_361512.jpg",
+  imageUrl:
+    "https://png.pngtree.com/template/20200404/ourmid/pngtree-women-s-clothing-logo-design-image_361512.jpg",
 };
 
 const billsData = [
@@ -58,8 +60,13 @@ const ShopDetail = ({ navigation }) => {
     </TouchableOpacity>
   );
 
+    const goToShopDetail = () => {
+    navigation.navigate("AboutShop");
+    };
+
   return (
     <ScrollView style={styles.container}>
+    <TouchableOpacity style={styles.card} onPress={goToShopDetail}>
       <View style={styles.shopCard}>
         <Image style={styles.shopImage} source={{ uri: shopData.imageUrl }} />
         <View style={styles.shopCardContent}>
@@ -67,8 +74,13 @@ const ShopDetail = ({ navigation }) => {
           <Text style={styles.shopDescription}>{shopData.description}</Text>
         </View>
       </View>
-
-      <View style={styles.loyalityContainer}></View>
+    </TouchableOpacity>
+      <View>
+        <Text style={styles.billsTitle}>My Loyality Program</Text>
+      </View>
+      <ScrollView style={styles.loyalityContainer}>
+        <MyAmountSpentCard />
+      </ScrollView>
       <View style={styles.billsContainer}>
         <Text style={styles.billsTitle}>Bills for {shopData.name}</Text>
         <View style={styles.tableHeader}>
@@ -103,25 +115,25 @@ const styles = StyleSheet.create({
   loyalityContainer: {
     marginTop: 10,
     height: 200,
-    backgroundColor: "#C8ACD6",
+    backgroundColor: "#433D8B",
     borderRadius: 8,
     marginHorizontal: 20,
   },
   tableHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingVertical: 10,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
   },
   tableHeaderText: {
     flex: 1,
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#2E236C'
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#2E236C",
   },
   shopCard: {
     flexDirection: "row",
@@ -165,7 +177,14 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "#2E236C",
   },
-  
+  loyalityTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
+    padding: 10,
+    color: "#2E236C",
+  },
+
   billItem: {
     flexDirection: "row",
     justifyContent: "space-between",

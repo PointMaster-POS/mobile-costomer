@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import EditProfile from './app/(tabs)/editprofile';
 import Home from './app/(tabs)/home';
 import ShopDetail from './app/(tabs)/shopdetail';
+import AboutShop from './app/(tabs)/aboutshop';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
       <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="ShopDetail" component={ShopDetail} />
+      <Stack.Screen name="AboutShop" component={AboutShop} />
       </Stack.Navigator>
       
     </NavigationContainer> 
