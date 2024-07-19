@@ -8,6 +8,8 @@ import EditProfile from './app/(tabs)/editprofile';
 import Home from './app/(tabs)/home';
 import ShopDetail from './app/(tabs)/shopdetail';
 import AboutShop from './app/(tabs)/aboutshop';
+import FlashMessage from 'react-native-flash-message';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -21,7 +23,9 @@ export default function App() {
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="ShopDetail" component={ShopDetail} />
       <Stack.Screen name="AboutShop" component={AboutShop} />
+      
       </Stack.Navigator>
+      <FlashMessage position="top" />
       
     </NavigationContainer> 
   );

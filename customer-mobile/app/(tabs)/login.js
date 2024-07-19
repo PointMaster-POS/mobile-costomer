@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { showMessage } from 'react-native-flash-message';
 
 //importing user authentication logic
 import AuthenticateUser from "../../lib/authuser";
@@ -23,9 +24,28 @@ const LoginScreen = () => {
   const handleLogin = () => {
     if (AuthenticateUser({ email, password })) {
       console.log("User authenticated");
+      showMessage({
+        message: "Login Successful",
+        description: "Welcome back!",
+        type: "success",
+        icon: "success",
+        duration: 3000,
+        color: "#fff",
+        backgroundColor: "#433D8B",
+      });
       navigation.replace("Home");
+      
     } else {
       console.log("User not authenticated");
+      showMessage({
+        message: "Login Failed",
+        description: "Invalid email or password",
+        type: "danger",
+        icon: "danger",
+        duration: 3000,
+        color: "#fff",
+        backgroundColor: "#433D8B",
+      });
     }
   };
 
