@@ -15,7 +15,6 @@ const QRCodeView = () => {
   );
 };
 
-
 //styles for qr code view
 const styles = StyleSheet.create({
   container: {

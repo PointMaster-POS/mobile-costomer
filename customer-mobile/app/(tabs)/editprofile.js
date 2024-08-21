@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 
 export default function EditProfile({ navigation }) {
     
+    //states of users deatils may be changed, should be fetched from server or async storage
     const [name, setName] = useState('John Doe');
     const [email, setEmail] = useState('johndoe@example.com');
     const [dateOfBirth, setDateOfBirth] = useState('1990-01-01');
@@ -41,6 +42,7 @@ export default function EditProfile({ navigation }) {
     );
 }
 
+//styles for edit profile screen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
