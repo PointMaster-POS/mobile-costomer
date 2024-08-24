@@ -1,10 +1,10 @@
-import fetch from 'node-fetch';
+//import fetch from 'node-fetch';
 
 const AuthenticateUser = async ({ email, password }) => {
-    if (!email || !password) {
+    if (!email && !password) {
       return false;
     }
   };
   
-  export default AuthenticateUser;
+export default AuthenticateUser;
   
