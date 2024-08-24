@@ -13,6 +13,7 @@ import QRCodeView from "./qrcodeview";
 //create tab navigator
 const Tab = createBottomTabNavigator();
 
+
 function Home() {
   return (
     <Tab.Navigator

@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import QrCode from "../components/qrcode";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const QRCodeView = () => {
-  //this user id should be retrieved from async storage
-  const userId = "12390";
+  const [accessToken, setAccessToken] = useState(null);
+  const userId = "12390"; // this user id should be retrieved from async storage
+
+  // Function to get token from AsyncStorage
+  const getToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem("accessToken");
+      setAccessToken(token);
+      console.log(token); // Log the token to the console
+    } catch (error) {
+      console.error("Failed to fetch token from AsyncStorage:", error);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My QR Code</Text>
@@ -15,7 +32,7 @@ const QRCodeView = () => {
   );
 };
 
-//styles for qr code view
+// Styles for QR code view
 const styles = StyleSheet.create({
   container: {
     flex: 1,

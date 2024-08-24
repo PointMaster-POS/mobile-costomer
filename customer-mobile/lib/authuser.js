@@ -1,14 +1,10 @@
-const axios = require('axios');
+import fetch from 'node-fetch';
 
-const AuthenticateUser = ({email, password}) => {
-   //call endpoint to authenticate user
-    //return true if user is authenticated, false otherwise
-    axios.post('localhost:3002/customer/login', {
-        email: email,
-        password: password
-    })
-
-
-}
-
-export default AuthenticateUser;
+const AuthenticateUser = async ({ email, password }) => {
+    if (!email || !password) {
+      return false;
+    }
+  };
+  
+  export default AuthenticateUser;
+  
