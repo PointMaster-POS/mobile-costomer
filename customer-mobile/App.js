@@ -8,10 +8,16 @@ import EditProfile from './app/(tabs)/editprofile';
 import Home from './app/(tabs)/home';
 import ShopDetail from './app/(tabs)/shopdetail';
 import AboutShop from './app/(tabs)/aboutshop';
-const Stack = createNativeStackNavigator();
+import { showMessage } from "react-native-flash-message";
+import { UserContextProvider } from './app/context/userContext';
+import FlashMessage from "react-native-flash-message";
 
+const Stack = createNativeStackNavigator();
 export default function App() {
+
+  
   return (
+    <UserContextProvider>
     <NavigationContainer >
     
       <Stack.Navigator >
@@ -22,8 +28,9 @@ export default function App() {
       <Stack.Screen name="ShopDetail" component={ShopDetail} />
       <Stack.Screen name="AboutShop" component={AboutShop} />
       </Stack.Navigator>
-      
+      <FlashMessage position="top" />
     </NavigationContainer> 
+    </UserContextProvider>
   );
 }
 

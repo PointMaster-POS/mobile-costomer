@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../context/userContext";
+import AsyncStorage  from "@react-native-async-storage/async-storage";
+import { showMessage } from "react-native-flash-message";
 
-import AuthenticateUser from "../../lib/authuser";
+import axios from "axios";
 
 const LoginScreen = () => {
+  const { setIsLogged} = useContext(UserContext);
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,13 +18,41 @@ const LoginScreen = () => {
     navigation.navigate("Register");
   };
 
-  const handleLogin = () => {
-    if (AuthenticateUser({ email, password })) {
-      console.log("User authenticated");
-      navigation.replace("Home");
-    } else {
-      console.log("User not authenticated");
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:3002/customer/login", {
+        email,
+        password,
+      });
+
+      if (response.data.error) {
+        showMessage({
+          message: response.data.error,
+          type: "danger",
+          color: "#fff",
+          backgroundColor: "#5e48a6",
+          icon: "info",
+          duration: 3000,
+        });
+      } else {
+        setIsLogged(true);
+        navigation.navigate("Home", { user: response.data });
+        await AsyncStorage.setItem("accessToken", response.data.accessToken.toString());
+        console.log(await AsyncStorage.getItem("accessToken"));
+      }
+    } catch (error) { 
+      showMessage({
+      message: "Error: " + error.message,
+      type: "danger",
+      color: "#fff",
+      backgroundColor: "#5e48a6",
+      icon: "info",
+      duration: 3000,
+    });
+
+      console.error("Error:", error.message);
     }
+  
   };
 
   return (
@@ -47,14 +79,12 @@ const LoginScreen = () => {
       />
 
       <Text style={styles.registerText}>
-        Don't have an account
+        Don't have an account?{" "}
         <Text
           style={styles.registerLinkText}
-          onPress={() => {
-            _handlePressButtonAsync();
-          }}
+          onPress={_handlePressButtonAsync}
         >
-        register
+          Register
         </Text>
       </Text>
     </SafeAreaView>
@@ -70,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#C8ACD6",
   },
   registerLinkText: {
-    color: '#433D8B',
+    color: "#433D8B",
     textDecorationLine: "underline",
   },
   registerText: {
@@ -86,7 +116,6 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
   },
-
   headerText: {
     fontSize: 30,
     fontWeight: "bold",
