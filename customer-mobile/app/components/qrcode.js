@@ -3,10 +3,10 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 //this component will generate the qr code
-const QrCode = ({ userId }) => {
+const QrCode = ({ phone }) => {
   return (
     <View style={styles.qrCodeContainer}>
-      <QRCode value={userId} size={200} color="#433D8B" />
+      <QRCode value={phone} size={200} color="#433D8B" />
     </View>
   );
 };

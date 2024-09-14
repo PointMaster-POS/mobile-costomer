@@ -2,6 +2,12 @@ import React from 'react';
 import { Modal,View,Text,TouchableOpacity,StyleSheet } from 'react-native';
 
 export default function BillModel ({selectedBill,isModalVisible,setModalVisible}) {
+  console.log(selectedBill.bill_id);
+
+  
+  
+
+
     return (
         <Modal
           transparent={true}
