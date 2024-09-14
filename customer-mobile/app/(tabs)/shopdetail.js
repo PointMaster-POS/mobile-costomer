@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
+
 import {
   View,
   Text,
@@ -40,9 +42,35 @@ const billsData = [
   },
 ];
 
-const ShopDetail = ({ navigation }) => {
+const ShopDetail = ({ route,navigation }) => {
+  //states
+  const [shopData, setShopData] = useState({});
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
+
+
+  //get shop data from backend
+  const getShopData = async () => {
+    //get shop id from route params
+    const shopId = route.params.businessID;
+    try {
+      //fetch shop data from server
+      const response = await axios.get(
+        `http://localhost:3004/shop/${shopId}`
+      );
+      setShopData(response.data);
+      console.log("Shop Data:", response.data);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    //call get shop data function
+    getShopData();
+  }, []);
+
+
 
   const renderBillItem = ({ item }) => (
     <TouchableOpacity
@@ -61,18 +89,21 @@ const ShopDetail = ({ navigation }) => {
   );
 
     const goToShopDetail = () => {
-    navigation.navigate("AboutShop");
+    navigation.navigate("AboutShop", {
+      shopData: shopData,
+    }); 
     };
 
   return (
     <ScrollView style={styles.container}>
-    <TouchableOpacity style={styles.card} onPress={goToShopDetail}>
+    <TouchableOpacity style={styles.card} onPress={goToShopDetail(shopData)}>
       <View style={styles.shopCard}>
-        <Image style={styles.shopImage} source={{ uri: shopData.imageUrl }} />
+        <Image style={styles.shopImage} source={{ uri: shopData.logo_location }} />
         <View style={styles.shopCardContent}>
-          <Text style={styles.shopName}>{shopData.name}</Text>
-          <Text style={styles.shopDescription}>{shopData.description}</Text>
+          <Text style={styles.shopName}>{shopData.business_mail}</Text>
+          <Text style={styles.shopDescription}>{shopData.business_description}</Text>
         </View>
+
       </View>
     </TouchableOpacity>
       <View>
