@@ -35,7 +35,7 @@ export default function BillScreen({ navigation }) {
           },
         }
       );
-      console.log("Response:", response.data);
+     
       setBillDetails(response.data);
     }
     catch (error) {
