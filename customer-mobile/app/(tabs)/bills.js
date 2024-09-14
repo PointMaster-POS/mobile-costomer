@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
+
 import {
   View,
   Text,
@@ -10,34 +12,45 @@ import {
 } from "react-native";
 import BillModel from "../components/billmodal";
 
-export default function BillScreen({ navigation }) {
-  //fetch bill details from server order by time related to paticular customer
-  const billDetails = [
-    {
-      id: "1",
-      businessName: "Store A",
-      time: "10:00 AM",
-      totalAmount: "$50.00",
-    },
-    {
-      id: "2",
-      businessName: "Store B",
-      time: "11:30 AM",
-      totalAmount: "$75.00",
-    },
-    {
-      id: "3",
-      businessName: "Store C",
-      time: "1:45 PM",
-      totalAmount: "$30.00",
-    },
-  ];
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+// const billDetails = [
+//   { id: '1', businessName: 'Store A', time: '10:00 AM', totalAmount: '$50.00' },
+//   { id: '2', businessName: 'Store B', time: '11:30 AM', totalAmount: '$75.00' },
+//   { id: '3', businessName: 'Store C', time: '1:45 PM', totalAmount: '$30.00' },
 
-  //states to handle bill details model
+// ];
+
+export default function BillScreen({ navigation }) {
+  const [billDetails, setBillDetails] = useState(billDetails);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
 
-  //function to handle row press
+  const getBillDetails = async () => {
+    //get accessToken from async storage
+    const accessToken = await AsyncStorage.getItem("accessToken");
+    try {
+      const response = await axios.get(
+        "http://localhost:3004/bills",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+     
+      setBillDetails(response.data);
+    }
+    catch (error) {
+      console.error("Error:", error.message);
+    }
+     
+  };
+  useEffect(() => {
+    getBillDetails();
+  }, []);
+
+
   const handleRowPress = (item) => {
     setSelectedBill(item);
     setModalVisible(true);
@@ -65,10 +78,12 @@ export default function BillScreen({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => handleRowPress(item)}>
               <View style={styles.tableRow}>
-                <Text style={styles.tableCell}>{item.id}</Text>
-                <Text style={styles.tableCell}>{item.businessName}</Text>
-                <Text style={styles.tableCell}>{item.time}</Text>
-                <Text style={styles.tableCell}>{item.totalAmount}</Text>
+
+                <Text style={styles.tableCell}>{item.bill_id}</Text>
+                <Text style={styles.tableCell}>{item.business_id}</Text>
+                <Text style={styles.tableCell}>{item.date_time}</Text>
+                <Text style={styles.tableCell}>{item.total_price}</Text>
+
               </View>
             </TouchableOpacity>
           )}

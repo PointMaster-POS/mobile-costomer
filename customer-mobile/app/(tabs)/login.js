@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { showMessage } from 'react-native-flash-message';
 
-//importing user authentication logic
-import AuthenticateUser from "../../lib/authuser";
+import { UserContext } from "../context/userContext";
+import AsyncStorage  from "@react-native-async-storage/async-storage";
+import { showMessage } from "react-native-flash-message";
+
+import axios from "axios";
 
 const LoginScreen = () => {
-  //initialize navigation
+  const { setIsLogged} = useContext(UserContext);
+
   const navigation = useNavigation();
 
   //states to handle user input
@@ -20,33 +23,42 @@ const LoginScreen = () => {
     navigation.navigate("Register");
   };
 
-  //function to handle login button press
-  const handleLogin = () => {
-    if (AuthenticateUser({ email, password })) {
-      console.log("User authenticated");
-      showMessage({
-        message: "Login Successful",
-        description: "Welcome back!",
-        type: "success",
-        icon: "success",
-        duration: 3000,
-        color: "#fff",
-        backgroundColor: "#433D8B",
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:3002/customer/login", {
+        email,
+        password,
       });
-      navigation.replace("Home");
-      
-    } else {
-      console.log("User not authenticated");
+
+      if (response.data.error) {
+        showMessage({
+          message: response.data.error,
+          type: "danger",
+          color: "#fff",
+          backgroundColor: "#5e48a6",
+          icon: "info",
+          duration: 3000,
+        });
+      } else {
+        setIsLogged(true);
+        navigation.navigate("Home", { user: response.data });
+        await AsyncStorage.setItem("accessToken", response.data.accessToken.toString());
+        console.log(await AsyncStorage.getItem("accessToken"));
+      }
+    } catch (error) { 
       showMessage({
-        message: "Login Failed",
-        description: "Invalid email or password",
-        type: "danger",
-        icon: "danger",
-        duration: 3000,
-        color: "#fff",
-        backgroundColor: "#433D8B",
-      });
+      message: "Error: " + error.message,
+      type: "danger",
+      color: "#fff",
+      backgroundColor: "#5e48a6",
+      icon: "info",
+      duration: 3000,
+    });
+
+      console.error("Error:", error.message);
+
     }
+  
   };
 
   return (
@@ -73,14 +85,14 @@ const LoginScreen = () => {
       />
 
       <Text style={styles.registerText}>
-        Don't have an account
+        Don't have an account?{" "}
         <Text
           style={styles.registerLinkText}
-          onPress={() => {
-            _handlePressButtonAsync();
-          }}
+          onPress={_handlePressButtonAsync}
         >
-          register
+
+          Register
+
         </Text>
       </Text>
     </SafeAreaView>
@@ -113,7 +125,6 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
   },
-
   headerText: {
     fontSize: 30,
     fontWeight: "bold",

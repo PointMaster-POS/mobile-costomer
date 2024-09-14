@@ -12,16 +12,18 @@ import ShopDetail from '../(tabs)/shopdetail'
 export default function ShopCard({navigation, shop}) {
 
   //when click on shopcard make navigation to shopdetail view
-  const goToShopDetail = () => {
-    navigation.navigate("ShopDetail");
+  const goToShopDetail = (businessID) => {
+    return () => {
+      navigation.navigate("ShopDetail", { businessID });
+    };
   };
 
   return (
-    <TouchableOpacity style={styles.card} onPress={goToShopDetail}>
-      <Image style={styles.image} source={{ uri: shop.imageUrl }} />
+    <TouchableOpacity style={styles.card} onPress={goToShopDetail(shop.business_id)}>
+      <Image style={styles.image} source={{ uri: shop.logo_location }} />
       <View style={styles.cardContent}>
-        <Text style={styles.shopName}>{shop.name}</Text>
-        <Text style={styles.description}>{shop.description}</Text>
+        <Text style={styles.shopName}>{shop.business_mail}</Text>
+        <Text style={styles.description}>{shop.business_description}</Text>
       </View>
     </TouchableOpacity>
   );
