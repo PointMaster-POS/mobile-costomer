@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import LoginScreen from './app/(tabs)/login';
@@ -11,6 +12,7 @@ import AboutShop from './app/(tabs)/aboutshop';
 import { showMessage } from "react-native-flash-message";
 import { UserContextProvider } from './app/context/userContext';
 import FlashMessage from "react-native-flash-message";
+
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -31,14 +33,15 @@ export default function App() {
       <FlashMessage position="top" />
     </NavigationContainer> 
     </UserContextProvider>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

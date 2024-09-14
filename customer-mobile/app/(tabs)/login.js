@@ -2,6 +2,7 @@ import React, { useState , useContext} from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+
 import { UserContext } from "../context/userContext";
 import AsyncStorage  from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
@@ -10,10 +11,14 @@ import axios from "axios";
 
 const LoginScreen = () => {
   const { setIsLogged} = useContext(UserContext);
+
   const navigation = useNavigation();
+
+  //states to handle user input
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  //function to handle register button press
   const _handlePressButtonAsync = async () => {
     navigation.navigate("Register");
   };
@@ -51,6 +56,7 @@ const LoginScreen = () => {
     });
 
       console.error("Error:", error.message);
+
     }
   
   };
@@ -84,13 +90,16 @@ const LoginScreen = () => {
           style={styles.registerLinkText}
           onPress={_handlePressButtonAsync}
         >
+
           Register
+
         </Text>
       </Text>
     </SafeAreaView>
   );
 };
 
+//styles for login screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,

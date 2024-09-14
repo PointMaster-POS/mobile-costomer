@@ -1,8 +1,10 @@
+
 import React, {useState, useEffect} from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import ShopCard from '../components/shopcard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+
 
 
 // const ShopCard = ({ shop }) => (
@@ -19,6 +21,7 @@ import axios from 'axios';
 // );
 
 export default function ShopsScreen({ navigation }) {
+
     const [shopsData, setShopsData] = useState([]);
 
     //fetch shops from the server
@@ -65,13 +68,14 @@ export default function ShopsScreen({ navigation }) {
             />
         </View>
     );
+
 }
 
+//styles for shop screen
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f0f0f0',
-        paddingTop: 20,
-    },
-  
+  container: {
+    flex: 1,
+    backgroundColor: "#f0f0f0",
+    paddingTop: 20,
+  },
 });

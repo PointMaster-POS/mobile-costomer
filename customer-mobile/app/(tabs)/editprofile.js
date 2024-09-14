@@ -10,12 +10,14 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
 
+
 export default function EditProfile({ route, navigation }) {
   const [name, setName] = useState(route.params.name);
   const [email, setEmail] = useState(route.params.email);
   const [dateOfBirth, setDateOfBirth] = useState(route.params.dob);
   const [phone, setPhone] = useState(route.params.phone);
   const [gender, setGender] = useState(route.params.gender);
+
 
   const handledUpdateProfile = async () => {
     //get token from async storage
@@ -82,6 +84,7 @@ export default function EditProfile({ route, navigation }) {
   );
 }
 
+//styles for edit profile screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,

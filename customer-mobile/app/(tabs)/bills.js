@@ -1,4 +1,6 @@
+
 import React, { useState, useEffect } from "react";
+
 import {
   View,
   Text,
@@ -9,6 +11,7 @@ import {
   Modal,
 } from "react-native";
 import BillModel from "../components/billmodal";
+
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // const billDetails = [
@@ -47,6 +50,7 @@ export default function BillScreen({ navigation }) {
     getBillDetails();
   }, []);
 
+
   const handleRowPress = (item) => {
     setSelectedBill(item);
     setModalVisible(true);
@@ -74,10 +78,12 @@ export default function BillScreen({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => handleRowPress(item)}>
               <View style={styles.tableRow}>
+
                 <Text style={styles.tableCell}>{item.bill_id}</Text>
                 <Text style={styles.tableCell}>{item.business_id}</Text>
                 <Text style={styles.tableCell}>{item.date_time}</Text>
                 <Text style={styles.tableCell}>{item.total_price}</Text>
+
               </View>
             </TouchableOpacity>
           )}
@@ -94,6 +100,7 @@ export default function BillScreen({ navigation }) {
   );
 }
 
+//styles for bill screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -13,6 +13,7 @@ import {
 import ShopBillsModal from "../components/shopbillsmodal";
 import MyAmountSpentCard from "../components/myamountspentcard";
 
+//need to be fetch based on shop id
 const shopData = {
   id: "1",
   name: "Shop A",
@@ -21,6 +22,7 @@ const shopData = {
     "https://png.pngtree.com/template/20200404/ourmid/pngtree-women-s-clothing-logo-design-image_361512.jpg",
 };
 
+//need to fetch from server based on user id and shop id
 const billsData = [
   {
     id: "1",
@@ -41,6 +43,7 @@ const billsData = [
     totalAmount: "$75.00",
   },
 ];
+
 
 const ShopDetail = ({ route,navigation }) => {
   //states
@@ -72,6 +75,7 @@ const ShopDetail = ({ route,navigation }) => {
 
 
 
+
   const renderBillItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
@@ -87,6 +91,7 @@ const ShopDetail = ({ route,navigation }) => {
       </View>
     </TouchableOpacity>
   );
+
 
     const goToShopDetail = () => {
     navigation.navigate("AboutShop", {
@@ -106,6 +111,7 @@ const ShopDetail = ({ route,navigation }) => {
 
       </View>
     </TouchableOpacity>
+
       <View>
         <Text style={styles.billsTitle}>My Loyality Program</Text>
       </View>
@@ -138,6 +144,7 @@ const ShopDetail = ({ route,navigation }) => {
   );
 };
 
+//styles for shop detail screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
