@@ -10,7 +10,7 @@ const QRCodeView = () => {
 
   const [phone, setPhone] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [totalLoyaltyPoints, setTotalLoyaltyPoints] = useState(400); // Example loyalty points
+  const [totalLoyaltyPoints, setTotalLoyaltyPoints] = useState(170); // Example loyalty points
 
   // Function to get phone from AsyncStorage
   const getPhone = async () => {
@@ -78,18 +78,21 @@ const QRCodeView = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View contentContainerStyle={styles.scrollContainer}>
       
       <View style={styles.container}>
+        <View style={styles.detailContainer}>
       <Text style={styles.loyaltyText}>Collect Stars and Earn Rewards!</Text>
       <Text style={styles.loyaltyText}>By Scanning the QR</Text>
         <View style={styles.qrCodeSection}>
           <QrCode userId={phone} />
 
         </View>
-        
-
         {phone && <Text style={styles.phoneText}>Phone: {phone}</Text>}
+        
+        </View>
+      <View style={styles.detailContainer}>
+        
 
         
         <Text style={styles.rewardTierText}>
@@ -112,9 +115,9 @@ const QRCodeView = () => {
           <Text>200</Text>
         </View>
       </View>
- 
+    </View>
       
-    </ScrollView>
+    </View>
   );
 };
 
@@ -130,16 +133,31 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
+    backgroundColor: "#f7f9fc",
+    padding: 20,
+   
+   
+
+    width: "100%",
+    height: "100%",
+  },
+
+  detailContainer: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
     backgroundColor: "#fff",
     padding: 20,
-    borderRadius: 15,
-    elevation: 5,
+    borderRadius: 10,
+    marginBottom: 20,
     width: "95%",
-    height: "100%",
   },
   qrCodeSection: {
 
-
+    justifyContent  : 'center',
+    alignItems: 'center',
     backgroundColor: "#fff",
     padding: 20,
     borderRadius: 10,

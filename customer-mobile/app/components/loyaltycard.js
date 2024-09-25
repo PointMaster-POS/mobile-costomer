@@ -40,7 +40,7 @@ export default function LoyaltyCard({ businessID }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>🎁 Loyalty Program</Text>
+            {/* <Text style={styles.title}>🎁 Loyalty Program</Text> */}
             <View style={styles.card}>
                 {/* Program Header with Gift Icon */}
                 <View style={styles.header}>

@@ -134,8 +134,9 @@ const ShopDetail = ({ route }) => {
 
           {/* Bills Section */}
           <View style={styles.billsContainer}>
+           
             <Text style={styles.billsTitle}>
-              Bills for {shopData.business_name}
+              My Bills at {shopData.business_name}
             </Text>
             <View style={styles.tableHeader}>
               <Text style={styles.tableHeaderText}>Bill ID</Text>
@@ -223,9 +224,15 @@ const styles = StyleSheet.create({
   },
   billsContainer: {
     marginTop: 20,
-    paddingHorizontal: 20,
-    backgroundColor: "#fff",
-    borderRadius: 12,
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+    margin: 20,
     elevation: 2,
   },
   billsTitle: {
@@ -240,8 +247,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 10,
     backgroundColor: "#f0f0f0",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    elevation: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    
+   
     borderColor: "#ccc",
   },
   tableHeaderText: {
@@ -254,9 +265,14 @@ const styles = StyleSheet.create({
   billItem: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 15,
+    backgroundColor: "#f9f9f9",
     paddingVertical: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
+    borderColor : "#ccc",
+    elevation: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
     borderBottomColor: "#ccc",
     alignItems: "center",
   },

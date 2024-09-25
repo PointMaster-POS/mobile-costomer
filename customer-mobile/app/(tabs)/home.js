@@ -55,7 +55,7 @@ function Home() {
           } else if (rn === "My QR CODE") {
             iconName = focused ? "qrcode" : "qrcode";
           }
-
+  
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
       })}
@@ -63,16 +63,25 @@ function Home() {
         activeTintColor: "#2E236C",
         inactiveTintColor: "#C8ACD6",
         labelStyle: { paddingBottom: 10, fontSize: 10 },
-        style: { padding: 10, height: 70 },
+        style: {
+          paddingTop: 20,
+          height: 70,
+          backgroundColor: "#fff",
+          elevation: 5, 
+          shadowColor: "#000", 
+          shadowOpacity: 0.1,
+          shadowOffset: { width: 0, height: 2 }, 
+          shadowRadius: 5, 
+        },
       }}
     >
-      
       <Tab.Screen name={"My QR CODE"} component={QRCodeView} />
       <Tab.Screen name={"bills"} component={BillScreen} />
       <Tab.Screen name={"shops"} component={ShopScreen} />
       <Tab.Screen name={"profile"} component={ProfileScreen} />
     </Tab.Navigator>
   );
+  
 }
 
 export default Home;

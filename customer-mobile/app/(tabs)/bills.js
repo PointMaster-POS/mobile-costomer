@@ -100,18 +100,32 @@ const styles = StyleSheet.create({
    
   },
   tableContainer: {
-    width: "100%",
+    width: "95%",
     marginBottom: 20,
     borderRadius: 10,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+    backgroundColor: "#fff",
+    margin: 10,
+    height: "95%",
+
   },
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 12,
-    backgroundColor: "#4A90E2",
+    backgroundColor: "#2E236C",
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: "#ccc",
+
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    
   },
   tableHeaderText: {
     flex: 1,
@@ -127,6 +141,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderBottomWidth: 1,
     borderColor: "#e0e0e0",
+    borderRadius: 10,
   },
   tableCell: {
     flex: 1,
