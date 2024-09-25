@@ -30,9 +30,10 @@ const ShopDetail = ({ route }) => {
   const getShopData = async () => {
     const shopId = route.params.businessID;
     try {
-      const response = await axios.get(`http://localhost:3004/shop/${shopId}`);
+      const response = await axios.get(`http://localhost:3004/shop/${shopId}`)
       setShopData(response.data);
-      console.log("Shop Data:", response.data);
+      
+      
     } catch (error) {
       console.error("Error fetching shop data:", error.message);
     }
@@ -109,9 +110,10 @@ const ShopDetail = ({ route }) => {
           <View style={styles.shopCard}>
             <Image
               style={styles.shopImage}
-              source={{ uri: shopData.logo_location }}
+              source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7WO9hLoMr9HvSHz-N1cf_vHMoKYaRDXqgxA&s' }}
             />
             <View style={styles.shopCardContent}>
+              {console.log("Shop Data:", shopData.business_name)}
               <Text style={styles.shopName}>{shopData.business_name}</Text>
               <Text style={styles.shopDescription}>
                 {shopData.business_description}
@@ -202,12 +204,13 @@ const styles = StyleSheet.create({
     color: "#888",
   },
   loyaltyContainer: {
-    marginTop: 10,
-    height: 200,
+
+ 
+    height: "auto" ,
     backgroundColor: "#433D8B",
-    borderRadius: 12,
-    marginHorizontal: 20,
-    padding: 10,
+  
+    padding: 20,
+    width: "100%",
   },
   loyaltyTitle: {
     fontSize: 22,

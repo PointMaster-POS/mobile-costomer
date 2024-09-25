@@ -6,6 +6,8 @@ import { UserContext } from '../context/userContext';
 
 
 export default function LoyaltyCard() {
+
+    //get loyalty details of business
     const { user } = React.useContext(UserContext);
     return (
         <View style={styles.container}>
