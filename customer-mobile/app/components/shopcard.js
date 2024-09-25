@@ -7,10 +7,9 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import ShopDetail from '../(tabs)/shopdetail'
+import ShopDetail from "../(tabs)/shopdetail";
 
-export default function ShopCard({navigation, shop}) {
-
+export default function ShopCard({ navigation, shop }) {
   //when click on shopcard make navigation to shopdetail view
   const goToShopDetail = (businessID) => {
     return () => {
@@ -19,7 +18,10 @@ export default function ShopCard({navigation, shop}) {
   };
 
   return (
-    <TouchableOpacity style={styles.card} onPress={goToShopDetail(shop.business_id)}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={goToShopDetail(shop.business_id)}
+    >
       <Image style={styles.image} source={{ uri: shop.logo_location }} />
       <View style={styles.cardContent}>
         <Text style={styles.shopName}>{shop.business_name}</Text>
@@ -38,9 +40,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 3,
     shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
     marginBottom: 20,
     padding: 10,
   },

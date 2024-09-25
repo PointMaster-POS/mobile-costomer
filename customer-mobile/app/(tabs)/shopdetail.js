@@ -126,9 +126,9 @@ const ShopDetail = ({ route }) => {
 
           {/* Loyalty Program Section */}
           <View>
-            <Text style={styles.loyaltyTitle}>My Loyalty Program</Text>
+            {/* <Text style={styles.loyaltyTitle}>My Loyalty Program</Text> */}
             <ScrollView style={styles.loyaltyContainer}>
-              <LoyaltyCard />
+              <LoyaltyCard businessID={shopData.business_id} />
             </ScrollView>
           </View>
 
@@ -169,15 +169,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7f9fc", // Light background for contrast
   },
   shopCard: {
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    elevation: 4,
-    marginBottom: 20,
+    backgroundColor: '#fff',
+    borderRadius: 15,
     padding: 20,
-    borderColor: "#e0e0e0",
-    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+    margin: 20,
+    justifyContent: "center",
+    alignItems: "center", 
   },
   shopImage: {
     width: 100,
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   shopName: {
-    fontSize: 24,
+    fontSize: 27,
     fontWeight: "bold",
     color: "#2E236C",
   },
@@ -209,11 +211,11 @@ const styles = StyleSheet.create({
     height: "auto" ,
     backgroundColor: "#433D8B",
   
-    padding: 20,
+   
     width: "100%",
   },
   loyaltyTitle: {
-    fontSize: 22,
+    fontSize: 10,
     fontWeight: "bold",
     marginBottom: 10,
     padding: 10,
