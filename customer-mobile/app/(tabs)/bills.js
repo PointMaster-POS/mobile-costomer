@@ -1,33 +1,24 @@
-
 import React, { useState, useEffect } from "react";
-
 import {
   View,
   Text,
   FlatList,
   StyleSheet,
-  Touchable,
   TouchableOpacity,
   Modal,
 } from "react-native";
 import BillModel from "../components/billmodal";
-
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// const billDetails = [
-//   { id: '1', businessName: 'Store A', time: '10:00 AM', totalAmount: '$50.00' },
-//   { id: '2', businessName: 'Store B', time: '11:30 AM', totalAmount: '$75.00' },
-//   { id: '3', businessName: 'Store C', time: '1:45 PM', totalAmount: '$30.00' },
-
-// ];
+import moment from "moment"; // For formatting date
 
 export default function BillScreen({ navigation }) {
-  const [billDetails, setBillDetails] = useState(billDetails);
+  const [billDetails, setBillDetails] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
 
+  // Fetch Bill Details from API
   const getBillDetails = async () => {
-    //get accessToken from async storage
     const accessToken = await AsyncStorage.getItem("accessToken");
     try {
       const response = await axios.get(
@@ -38,51 +29,51 @@ export default function BillScreen({ navigation }) {
           },
         }
       );
-      console.log("Response:", response.data); 
-     
       setBillDetails(response.data);
+    } catch (error) {
+      console.error("Error fetching bills:", error.message);
     }
-    catch (error) {
-      console.error("Error:", error.message);
-    }
-     
   };
+
   useEffect(() => {
     getBillDetails();
   }, []);
-
 
   const handleRowPress = (item) => {
     setSelectedBill(item);
     setModalVisible(true);
   };
+
+  const formatCurrency = (amount) => `$${parseFloat(amount).toFixed(2)}`;
+
+  const formatDate = (dateTime) => {
+    return moment(dateTime).format("MMM DD, YYYY, h:mm A");
+  };
+
   return (
     <View style={styles.container}>
-      {/* <Text
-        onPress={() => {
-          alert('this is the home page');
-        }}
-        style={styles.headerText}
-      >
-        Shops Screen
-      </Text> */}
       <View style={styles.tableContainer}>
         <View style={styles.tableHeader}>
           <Text style={styles.tableHeaderText}>Bill ID</Text>
           <Text style={styles.tableHeaderText}>Business Name</Text>
-          <Text style={styles.tableHeaderText}>Time</Text>
+          <Text style={styles.tableHeaderText}>Date & Time</Text>
           <Text style={styles.tableHeaderText}>Total Amount</Text>
         </View>
         <FlatList
           data={billDetails}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
+          keyExtractor={(item) => item.bill_id.toString()}
+          renderItem={({ item, index }) => (
             <TouchableOpacity onPress={() => handleRowPress(item)}>
-              <View style={styles.tableRow}>
+              <View
+                style={[
+                  styles.tableRow,
+                  index % 2 === 0 ? styles.evenRow : styles.oddRow,
+                ]}
+              >
                 <Text style={styles.tableCell}>{item.bill_id}</Text>
-                <Text style={styles.tableCell}>{item.business_id}</Text>
-                <Text style={styles.tableCell}>{item.date_time}</Text>
-                <Text style={styles.tableCell}>{item.total_price}</Text>
+                <Text style={styles.tableCell}>{item.business_name}</Text>
+                <Text style={styles.tableCell}>{formatDate(item.date_time)}</Text>
+                <Text style={styles.tableCell}>{formatCurrency(item.total_price)}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -99,26 +90,25 @@ export default function BillScreen({ navigation }) {
   );
 }
 
-//styles for bill screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#f7f7f7",
     alignItems: "center",
     justifyContent: "top",
-  },
-  headerText: {
-    fontSize: 26,
-    fontWeight: "bold",
-    marginBottom: 20,
+    borderRadius: 15,
+   
   },
   tableContainer: {
-    width: "90%",
+    width: "100%",
+    marginBottom: 20,
+    borderRadius: 10,
   },
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 10,
-    backgroundColor: "#f0f0f0",
+    paddingVertical: 12,
+    backgroundColor: "#4A90E2",
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: "#ccc",
@@ -127,18 +117,26 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontWeight: "bold",
+    color: "#fff",
     textAlign: "center",
   },
   tableRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 5,
     borderBottomWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#e0e0e0",
   },
   tableCell: {
     flex: 1,
     fontSize: 14,
     textAlign: "center",
+  },
+  evenRow: {
+    backgroundColor: "#f9f9f9",
+  },
+  oddRow: {
+    backgroundColor: "#fff",
   },
 });

@@ -22,7 +22,7 @@ export default function ShopCard({navigation, shop}) {
     <TouchableOpacity style={styles.card} onPress={goToShopDetail(shop.business_id)}>
       <Image style={styles.image} source={{ uri: shop.logo_location }} />
       <View style={styles.cardContent}>
-        <Text style={styles.shopName}>{shop.business_mail}</Text>
+        <Text style={styles.shopName}>{shop.business_name}</Text>
         <Text style={styles.description}>{shop.business_description}</Text>
       </View>
     </TouchableOpacity>

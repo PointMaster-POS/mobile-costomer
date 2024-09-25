@@ -12,6 +12,7 @@ export default function BillModel({
 
   //state to hold bill details
   const [billDetails, setBillDetails] = useState({});
+  const [showBillDetails, setShowBillDetails] = useState(true);
 
   const getBillDetails = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
@@ -47,24 +48,37 @@ export default function BillModel({
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Bill Details</Text>
-          <Text style={styles.modalText}>Bill ID: {billDetails.bill_id}</Text>
-          <Text style={styles.modalText}>
-            Business Name: {billDetails.branch_id}
-          </Text>
-          <Text style={styles.modalText}>Time: {billDetails.date_time}</Text>
-          <Text style={styles.modalText}>
-            Payement method: {billDetails.payment_method}
-          </Text>
-          <Text style={styles.modalText}>
-            Payed Amount: {billDetails.received}
-          </Text>
-          <Text style={styles.modalText}>
-            Total Amount: {billDetails.total_price}
-          </Text>
-          <Text style={styles.modalText}>
-            Status : {billDetails.status ? "completed" : "not completed"}
-          </Text>
+          { showBillDetails ? (
+          <><Text style={styles.modalTitle}>Bill Details</Text><Text style={styles.modalText}>Bill ID: {billDetails.bill_id}</Text><Text style={styles.modalText}>
+              Branch Name: {billDetails.branch_name}
+            </Text><Text style={styles.modalText}>Time: {billDetails.date_time}</Text><Text style={styles.modalText}>
+                Payement method: {billDetails.payment_method}
+              </Text><Text style={styles.modalText}>
+                Cashier Name: {billDetails.employee_name}
+              </Text><Text style={styles.modalText}>
+                Payed Amount: {billDetails.received}
+              </Text><Text style={styles.modalText}>
+                Total Amount: {billDetails.total_price}
+              </Text><Text style={styles.modalText}>
+                Status : {billDetails.status ? "completed" : "not completed"}
+              </Text></>
+          ) : (
+            <><Text style={styles.modalTitle}>Bill Items</Text>
+            {billDetails.items && billDetails.items.map((item, index) => (
+              <Text key={index} style={styles.modalText}>
+                {item.item_name} - {item.quantity} x {item.price}
+              </Text>
+            ))}</>
+
+          )
+          }
+          <TouchableOpacity
+            onPress={() => setShowBillDetails(!showBillDetails)}
+            style={styles.closeButton}
+          >
+            <Text style={styles.closeButtonText}> {showBillDetails ? "View Items" : "Bill Details"} Bill Details</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => setModalVisible(false)}
             style={styles.closeButton}
@@ -82,6 +96,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    //ease annimate when height changes
+    
+
+
+
   },
   modalContent: {
     width: "80%",
@@ -113,6 +132,8 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#433D8B",
     borderRadius: 5,
+    width: "100%",
+    alignItems: "center",
   },
   closeButtonText: {
     color: "white",

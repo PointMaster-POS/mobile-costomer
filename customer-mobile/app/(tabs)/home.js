@@ -52,7 +52,7 @@ function Home() {
             iconName = focused ? "user" : "user";
           } else if (rn === "shops") {
             iconName = focused ? "shopping-bag" : "shopping-bag";
-          } else if (rn === "qrcode") {
+          } else if (rn === "My QR CODE") {
             iconName = focused ? "qrcode" : "qrcode";
           }
 
@@ -67,7 +67,7 @@ function Home() {
       }}
     >
       
-      <Tab.Screen name={"qrcode"} component={QRCodeView} />
+      <Tab.Screen name={"My QR CODE"} component={QRCodeView} />
       <Tab.Screen name={"bills"} component={BillScreen} />
       <Tab.Screen name={"shops"} component={ShopScreen} />
       <Tab.Screen name={"profile"} component={ProfileScreen} />

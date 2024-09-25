@@ -5,28 +5,11 @@ import ShopCard from '../components/shopcard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-
-
-// const ShopCard = ({ shop }) => (
-//     <TouchableOpacity style={styles.card}>
-//         <Image
-//             style={styles.image}
-//             source={{ uri: shop.imageUrl }}
-//         />
-//         <View style={styles.cardContent}>
-//             <Text style={styles.shopName}>{shop.name}</Text>
-//             <Text style={styles.description}>{shop.description}</Text>
-//         </View>
-//     </TouchableOpacity>
-// );
-
 export default function ShopsScreen({ navigation }) {
-
     const [shopsData, setShopsData] = useState([]);
 
-    //fetch shops from the server
+    // Fetch shops from the server
     const getShops = async () => {
-        //get access token from async storage
         const accessToken = await AsyncStorage.getItem('accessToken');
         try {
             const response = await axios.get('http://localhost:3004/shop', {
@@ -42,40 +25,31 @@ export default function ShopsScreen({ navigation }) {
         }
     };
 
-    useEffect (() => {
+    useEffect(() => {
         getShops();
     }, []);
-
-
-
-
-
-
 
     const renderItem = ({ item }) => (
         <ShopCard shop={item} navigation={navigation} />
     );
-
-
 
     return (
         <View style={styles.container}>
             <FlatList
                 data={shopsData}
                 renderItem={renderItem}
-                keyExtractor={item => item.business_id}
+                keyExtractor={item => item.business_id.toString()} // Ensure the key is a string
                 contentContainerStyle={{ paddingHorizontal: 20 }}
             />
         </View>
     );
-
 }
 
-//styles for shop screen
+// styles for shop screen
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f0f0f0",
-    paddingTop: 20,
-  },
+    container: {
+        flex: 1,
+        backgroundColor: "#f0f0f0",
+        paddingTop: 20,
+    },
 });

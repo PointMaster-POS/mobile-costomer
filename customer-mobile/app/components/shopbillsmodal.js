@@ -12,7 +12,7 @@ export default function ShopBillsModal ({selectedBill,isModalVisible,setModalVis
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalTitle}>Bill Details</Text>
-              <Text style={styles.modalText}>Bill ID: {selectedBill.id}</Text>
+              <Text style={styles.modalText}>Bill ID: {selectedBill.bill_id}</Text>
               <Text style={styles.modalText}>Date : {selectedBill.date}</Text>
               <Text style={styles.modalText}>Time: {selectedBill.time}</Text>
               <Text style={styles.modalText}>Total Amount: {selectedBill.totalAmount}</Text>
