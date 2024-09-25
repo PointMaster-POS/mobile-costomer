@@ -38,6 +38,7 @@ export default function BillScreen({ navigation }) {
           },
         }
       );
+      console.log("Response:", response.data); 
      
       setBillDetails(response.data);
     }
@@ -78,12 +79,10 @@ export default function BillScreen({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => handleRowPress(item)}>
               <View style={styles.tableRow}>
-
                 <Text style={styles.tableCell}>{item.bill_id}</Text>
                 <Text style={styles.tableCell}>{item.business_id}</Text>
                 <Text style={styles.tableCell}>{item.date_time}</Text>
                 <Text style={styles.tableCell}>{item.total_price}</Text>
-
               </View>
             </TouchableOpacity>
           )}

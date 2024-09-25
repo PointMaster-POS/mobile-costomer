@@ -43,6 +43,11 @@ export default function CustomerProfile({ navigation }) {
 
     //get customer details from the server
     useEffect(() => {
+
+        if (!customer) {
+            return;
+        }
+        
         getCustomerDetails();
     }, []);
 
