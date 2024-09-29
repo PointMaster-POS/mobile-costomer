@@ -20,7 +20,7 @@ export default function BillModel({
     try {
       //get bill by bill id
       const response = await axios.get(
-        "http://localhost:3004/bills/" + selectedBill.bill_id,
+        `http://localhost:3004/bills/${selectedBill.bill_id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -34,10 +34,14 @@ export default function BillModel({
     }
   };
 
+//use effect to call get bill details function when nagivation is changed
   useEffect(() => {
     //call get bill details function
     getBillDetails();
-  }, []);
+    //re render when isModalVisible changes
+
+    
+  }, [isModalVisible]);
 
   return (
     <Modal
@@ -121,7 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 20,
-    color: "#2E236C",
+    color: "black",
   },
   modalText: {
     fontSize: 16,

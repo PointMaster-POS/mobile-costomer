@@ -41,6 +41,8 @@ const LoginScreen = () => {
         });
       } else {
         setIsLogged(true);
+        setEmail("");
+        setPassword("");
         navigation.navigate("Home", { user: response.data });
         await AsyncStorage.setItem("accessToken", response.data.accessToken.toString());
         console.log(await AsyncStorage.getItem("accessToken"));
