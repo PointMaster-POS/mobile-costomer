@@ -85,7 +85,7 @@ export default function CustomerProfile({ navigation }) {
         <Image
           style={styles.profileImage}
           source={{
-            uri: "https://img.freepik.com/free-photo/bearded-man-with-striped-shirt_273609-7180.jpg",
+            uri: customer.photo_url,
           }}
         />
         <Text style={styles.name}>{customer.customer_name}</Text>
@@ -104,7 +104,7 @@ export default function CustomerProfile({ navigation }) {
               email: customer.customer_mail,
               phone: customer.customer_phone,
               dob: customer.birthday,
-              profileImage: customer.profileImage,
+              profileImage: customer.photo_url,
               gender: customer.gender,
             });
           }}

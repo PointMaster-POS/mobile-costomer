@@ -11,9 +11,9 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
 import * as ImagePicker from "expo-image-picker"; // Expo Image Picker
-import * as FileSystem from "expo-file-system";    // Expo File System for Base64
-import DateTimePicker from '@react-native-community/datetimepicker'; // DateTimePicker
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import vector icons
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase Storage
+import DateTimePicker from "@react-native-community/datetimepicker"; // DateTimePicker
+import Icon from "react-native-vector-icons/FontAwesome"; // Import vector icons
 
 export default function EditProfile({ route, navigation }) {
   const [name, setName] = useState(route.params.name);
@@ -22,13 +22,14 @@ export default function EditProfile({ route, navigation }) {
   const [phone, setPhone] = useState(route.params.phone);
   const [gender, setGender] = useState(route.params.gender);
   const [profileImage, setProfileImage] = useState(route.params.profileImage);
-  const [profileImageBase64, setProfileImageBase64] = useState(null); // Base64 encoded image
   const [showDatePicker, setShowDatePicker] = useState(false); // State for showing date picker
 
-  // Function to handle image picking
+  const storage = getStorage(); // Initialize Firebase Storage
+
+  // Function to handle image picking and uploading to Firebase
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    
+
     if (!permissionResult.granted) {
       alert("Permission to access media library is required!");
       return;
@@ -42,16 +43,30 @@ export default function EditProfile({ route, navigation }) {
     });
 
     if (!result.canceled) {
-      setProfileImage(result.uri); // Set selected image URI
-      
-      // Convert image to Base64
-      const base64Image = await FileSystem.readAsStringAsync(result.uri, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
-      setProfileImageBase64(base64Image);  // Store Base64 string in state
+      const pickedImageUri = result.uri;
+      setProfileImage(pickedImageUri); // Set selected image URI
+
+      // Upload image to Firebase Storage
+      const imageBlob = await fetchImageAsBlob(pickedImageUri); // Helper function to fetch image as a blob
+      const storageRef = ref(storage, `profileImages/${route.params.id}`); // Reference to storage
+
+      // Upload image to Firebase
+      await uploadBytes(storageRef, imageBlob);
+
+      // Get the download URL
+      const downloadUrl = await getDownloadURL(storageRef);
+      setProfileImage(downloadUrl); // Store download URL in state
     }
   };
 
+  // Helper function to convert image URI to blob
+  const fetchImageAsBlob = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    return blob;
+  };
+
+  // Handle profile update
   const handleUpdateProfile = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
 
@@ -64,7 +79,7 @@ export default function EditProfile({ route, navigation }) {
           customer_phone: phone,
           birthday: dateOfBirth.toISOString().split("T")[0], // Format to YYYY-MM-DD
           gender: gender,
-          profile_image_base64: profileImageBase64,  // Send Base64 encoded image
+          profile_image_url: profileImage, // Send the Firebase image URL
         },
         {
           headers: {
@@ -83,26 +98,24 @@ export default function EditProfile({ route, navigation }) {
     }
   };
 
-  // Function to handle date change
+  // Handle date change for DatePicker
   const onDateChange = (event, selectedDate) => {
     if (selectedDate) {
       setShowDatePicker(false); // Hide date picker
       setDateOfBirth(selectedDate); // Set selected date
-    } 
+    }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Profile Photo</Text>
       <View style={styles.profileImageContainer}>
-      <TouchableOpacity onPress={pickImage}>
-        <Image 
-          source={{ uri: "https://img.freepik.com/free-photo/bearded-man-with-striped-shirt_273609-7180.jpg" }}
-          style={styles.profileImage}
-        />
-        <Text style={styles.editPhotoText}>Edit Profile Photo</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={pickImage}>
+          <Image source={{ uri: profileImage }} style={styles.profileImage} />
+          <Text style={styles.editPhotoText}>Edit Profile Photo</Text>
+        </TouchableOpacity>
       </View>
+
       <Text style={styles.label}>Name</Text>
       <TextInput style={styles.input} value={name} onChangeText={setName} />
 
@@ -111,19 +124,8 @@ export default function EditProfile({ route, navigation }) {
 
       <Text style={styles.label}>Date of Birth</Text>
       <View style={styles.datePickerContainer}>
-      <DateTimePicker 
-          value={dateOfBirth}
-          mode="date"
-          display="default"
-          onChange={onDateChange}
-        />
+        <DateTimePicker value={dateOfBirth} mode="date" display="default" onChange={onDateChange} />
       </View>
-        <TouchableOpacity style={styles.datePicker} onPress={() => setShowDatePicker(true)}>
-        {/* <Icon name="calendar" size={20} color="#433D8B" style={styles.icon} /> */}
-      </TouchableOpacity>
-
-       
-     
 
       <Text style={styles.label}>Gender</Text>
       <TextInput style={styles.input} value={gender} onChangeText={setGender} />
@@ -141,13 +143,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#f8f9fa",
-  },
-  datePickerContainer: {
-    flexDirection: 'row', // Aligns input and icon horizontally
-    alignItems: 'center', // Centers vertically
-
-    // backgroundColor: "#c8acd6",
-    borderRadius: 5,
   },
   profileImageContainer: {
     alignItems: "center",
@@ -176,14 +171,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     marginBottom: 20,
-    color: "#C8ACD6",
-  },
-  datePicker: {
-    flexDirection: 'row', // Aligns input and icon horizontally
-    alignItems: 'center', // Centers vertically
-  },
-  icon: {
-    marginLeft: 10, // Add some space between input and icon
   },
   button: {
     backgroundColor: "#2E236C",
@@ -194,7 +181,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: "#C8ACD6",
+    color: "#fff",
     fontWeight: "bold",
   },
 });
