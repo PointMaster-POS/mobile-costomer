@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#1E3E62",
+    color: "#433D8B",
     textAlign: "center",
   },
   rewardTierText: {

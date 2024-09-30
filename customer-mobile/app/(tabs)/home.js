@@ -15,13 +15,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 //create tab navigator
 const Tab = createBottomTabNavigator();
 
-
 function Home() {
   const { isLogged } = React.useContext(UserContext);
 
   useEffect(() => {
     if (isLogged) {
-      
       showMessage({
         message: "Login Successful",
         type: "success",
@@ -31,12 +29,7 @@ function Home() {
         duration: 3000,
       });
     }
-   
-
-    
-
   }, [isLogged]);
-
 
   return (
     <Tab.Navigator
@@ -45,43 +38,41 @@ function Home() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let rn = route.name;
-          //change icon based on route name
-          if (rn === "bills") {
+          // Change icon based on route name
+          if (rn === "MY BILLS") {
             iconName = focused ? "credit-card-alt" : "credit-card-alt";
-          } else if (rn === "profile") {
+          } else if (rn === "PROFILE") {
             iconName = focused ? "user" : "user";
-          } else if (rn === "shops") {
+          } else if (rn === "MY SHOPS") {
             iconName = focused ? "shopping-bag" : "shopping-bag";
-          } else if (rn === "My QR CODE") {
+          } else if (rn === "MY QR CODE") {
             iconName = focused ? "qrcode" : "qrcode";
           }
-  
+
           return <FontAwesome name={iconName} size={size} color={color} />;
+        },
+        headerStyle: {
+          backgroundColor: '#1E3E62', // Set the header background color
+        },
+        headerTintColor: '#fff', // Set the header text and icon color
+        headerTitleStyle: {
+          fontWeight: 'bold',
         },
       })}
       tabBarOptions={{
-        activeTintColor: "#2E236C",
-        inactiveTintColor: "#C8ACD6",
-        labelStyle: { paddingBottom: 10, fontSize: 10 },
-        style: {
-          paddingTop: 20,
-          height: 70,
-          backgroundColor: "#fff",
-          elevation: 5, 
-          shadowColor: "#000", 
-          shadowOpacity: 0.1,
-          shadowOffset: { width: 0, height: 2 }, 
-          shadowRadius: 5, 
-        },
+        activeTintColor: "#FF6500",
+        inactiveTintColor: "#FFD0B2", // Corrected the color format
+        labelStyle: { fontSize: 20 }, // Adjust font size if needed
+        tabBarStyle: { height: 100 },  // Set the tab bar height to 80 (or any value)
+        labelStyle: { paddingBottom: 10, fontSize: 10, paddingTop: 10 },
       }}
     >
-      <Tab.Screen name={"My QR CODE"} component={QRCodeView} />
-      <Tab.Screen name={"bills"} component={BillScreen} />
-      <Tab.Screen name={"shops"} component={ShopScreen} />
-      <Tab.Screen name={"profile"} component={ProfileScreen} />
+      <Tab.Screen name={"MY QR CODE"} component={QRCodeView} />
+      <Tab.Screen name={"MY BILLS"} component={BillScreen} />
+      <Tab.Screen name={"MY SHOPS"} component={ShopScreen} />
+      <Tab.Screen name={"PROFILE"} component={ProfileScreen} />
     </Tab.Navigator>
   );
-  
 }
 
 export default Home;
