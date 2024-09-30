@@ -6,7 +6,7 @@ import { View, StyleSheet } from "react-native";
 const QrCode = ({ phone }) => {
   return (
     <View style={styles.qrCodeContainer}>
-      <QRCode value={phone} size={200} color="#433D8B" />
+      <QRCode value={phone} size={200} color="#FF6500" />
     </View>
   );
 };

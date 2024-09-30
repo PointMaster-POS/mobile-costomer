@@ -26,7 +26,7 @@ function Home() {
         message: "Login Successful",
         type: "success",
         color: "#fff",
-        backgroundColor: "#5e48a6",
+        backgroundColor: "#FF6500",
         icon: "info",
         duration: 3000,
       });

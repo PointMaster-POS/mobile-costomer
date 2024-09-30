@@ -35,7 +35,7 @@ const LoginScreen = () => {
           message: response.data.error,
           type: "danger",
           color: "#fff",
-          backgroundColor: "#5e48a6",
+          backgroundColor: "#FF6500",
           icon: "info",
           duration: 3000,
         });
@@ -52,7 +52,7 @@ const LoginScreen = () => {
       message: "Error: " + error.message,
       type: "danger",
       color: "#fff",
-      backgroundColor: "#5e48a6",
+      backgroundColor: "#FF6500",
       icon: "info",
       duration: 3000,
     });
@@ -108,10 +108,10 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#C8ACD6",
+    backgroundColor: "#1E3E62",
   },
   registerLinkText: {
-    color: "#433D8B",
+    color: "#FF6500",
     textDecorationLine: "underline",
   },
   registerText: {
@@ -122,13 +122,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: "100%",
     borderRadius: 10,
-    backgroundColor: "#433D8B",
+    backgroundColor: "#FF6500",
   },
   input: {
     width: "100%",
   },
   headerText: {
     fontSize: 30,
+    color: "#FF6500",
     fontWeight: "bold",
     marginBottom: 20,
   },

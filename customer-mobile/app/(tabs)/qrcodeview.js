@@ -135,8 +135,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#f7f9fc",
     padding: 20,
-   
-   
 
     width: "100%",
     height: "100%",
@@ -144,6 +142,7 @@ const styles = StyleSheet.create({
 
   detailContainer: {
     shadowColor: '#000',
+   
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -158,8 +157,10 @@ const styles = StyleSheet.create({
 
     justifyContent  : 'center',
     alignItems: 'center',
-    backgroundColor: "#fff",
-    padding: 20,
+    backgroundColor: "#1E3E62",
+     paddingVertical: 30,
+     marginTop: 20,
+   
     borderRadius: 10,
     elevation: 4,
     marginBottom: 20,
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#433D8B",
+    color: "#1E3E62",
     textAlign: "center",
   },
   rewardTierText: {
