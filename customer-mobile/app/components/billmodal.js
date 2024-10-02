@@ -70,7 +70,7 @@ export default function BillModel({
             <><Text style={styles.modalTitle}>Bill Items</Text>
             {billDetails.items && billDetails.items.map((item, index) => (
               <Text key={index} style={styles.modalText}>
-                {item.item_name} - {item.quantity} x {item.price}
+                {item.item_id} - {item.quantity} x {item.price}
               </Text>
             ))}</>
 
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   closeButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: "#433D8B",
+    backgroundColor: "#FF6500",
     borderRadius: 5,
     width: "100%",
     alignItems: "center",

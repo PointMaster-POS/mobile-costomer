@@ -33,7 +33,7 @@ function Home() {
 
   return (
     <Tab.Navigator
-      initialRouteName={"qrcode"}
+      initialRouteName={"My QR Code"}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -52,18 +52,29 @@ function Home() {
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
         headerStyle: {
-          backgroundColor: '#0B192C', // Set the header background color
+          backgroundColor: "#1E3E62",
         },
-        headerTintColor: '#fff', // Set the header text and icon color
+        headerTintColor: "#fff", // Set the header text and icon color
         headerTitleStyle: {
-          fontWeight: 'bold',
+          borderBottomColor: "#FF6500",
+          borderBottomWidth: 2,
+          fontWeight: "bold",
+        },
+
+        tabBarStyle: {
+          backgroundColor: "#1E3E62",
+          borderTopColor: "#FF6500",
+
+          borderTopWidth: 2,
+          height: 100,
+          paddingTop: 10,
         },
       })}
       tabBarOptions={{
         activeTintColor: "#FF6500",
-        inactiveTintColor: "#FFD0B2", // Corrected the color format
+        inactiveTintColor: "gray",
         labelStyle: { fontSize: 20 }, // Adjust font size if needed
-        tabBarStyle: { height: 100 },  // Set the tab bar height to 80 (or any value)
+        tabBarStyle: { height: 100 }, // Set the tab bar height to 80 (or any value)
         labelStyle: { paddingBottom: 10, fontSize: 10, paddingTop: 10 },
       }}
     >

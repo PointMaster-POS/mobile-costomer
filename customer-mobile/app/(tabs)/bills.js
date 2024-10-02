@@ -93,10 +93,10 @@ export default function BillScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#0B192C", 
     alignItems: "center",
     justifyContent: "top",
-    borderRadius: 15,
+   
    
   },
   tableContainer: {
@@ -109,19 +109,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 5,
-    backgroundColor: "#fff",
+    backgroundColor: "#1E3E62",
     margin: 10,
     height: "95%",
+
 
   },
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 12,
-    backgroundColor: "#0B192C",
+    backgroundColor: "#FF6500",
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: "#ccc",
+ 
 
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
@@ -140,18 +141,19 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 5,
     borderBottomWidth: 1,
-    borderColor: "#e0e0e0",
-    borderRadius: 10,
+    borderColor: "#FF6500",
+
   },
   tableCell: {
     flex: 1,
     fontSize: 14,
     textAlign: "center",
+    color: "#fff",
   },
   evenRow: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#1E3E62"
   },
   oddRow: {
-    backgroundColor: "#fff",
+    backgroundColor: "#2a5789",
   },
 });

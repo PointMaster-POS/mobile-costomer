@@ -32,8 +32,6 @@ const ShopDetail = ({ route }) => {
     try {
       const response = await axios.get(`http://localhost:3004/shop/${shopId}`)
       setShopData(response.data);
-      
-      
     } catch (error) {
       console.error("Error fetching shop data:", error.message);
     }

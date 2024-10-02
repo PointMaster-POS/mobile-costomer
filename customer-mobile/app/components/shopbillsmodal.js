@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal,View,Text,TouchableOpacity,StyleSheet } from 'react-native';
 
 export default function ShopBillsModal ({selectedBill,isModalVisible,setModalVisible}) {
+  console.log("Selected Bill:", selectedBill);
     return (
         <Modal
           transparent={true}
@@ -13,9 +14,9 @@ export default function ShopBillsModal ({selectedBill,isModalVisible,setModalVis
             <View style={styles.modalContent}>
               <Text style={styles.modalTitle}>Bill Details</Text>
               <Text style={styles.modalText}>Bill ID: {selectedBill.bill_id}</Text>
-              <Text style={styles.modalText}>Date : {selectedBill.date}</Text>
-              <Text style={styles.modalText}>Time: {selectedBill.time}</Text>
-              <Text style={styles.modalText}>Total Amount: {selectedBill.totalAmount}</Text>
+              <Text style={styles.modalText}>Date : {selectedBill.date_time}</Text>
+              <Text style={styles.modalText}>Total Amount: {selectedBill.total_price}</Text>
+              {/* <Text style={styles.modalText}>Total Amount: {selectedBill.totalAmount}</Text> */}
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
                 style={styles.closeButton}
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     closeButton: {
       marginTop: 20,
       padding: 10,
-      backgroundColor: '#433D8B',
+      backgroundColor: '#FF6500',
       borderRadius: 5,
     },
     closeButtonText: {

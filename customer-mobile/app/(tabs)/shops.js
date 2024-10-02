@@ -49,7 +49,7 @@ export default function ShopsScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fefefe",
+        backgroundColor: "#0B192C",
         paddingTop: 20,
     },
 });

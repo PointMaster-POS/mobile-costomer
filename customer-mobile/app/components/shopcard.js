@@ -36,10 +36,12 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 8,
+    backgroundColor: "#1E3E62"  ,
+    borderRadius: 15,
     elevation: 3,
-    shadowColor: "#000",
+    shadowColor: "#FF6500",
+    borderWidth: 1,
+    borderColor: "#FF6500",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
   shopName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
   description: {
     fontSize: 14,

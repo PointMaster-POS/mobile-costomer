@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
 import QrCode from "../components/qrcode"; // Assuming you have a separate QR code component
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserContext } from "../context/userContext";
@@ -79,44 +85,39 @@ const QRCodeView = () => {
 
   return (
     <View contentContainerStyle={styles.scrollContainer}>
-      
       <View style={styles.container}>
         <View style={styles.detailContainer}>
-      <Text style={styles.loyaltyText}>Collect Stars and Earn Rewards!</Text>
-      <Text style={styles.loyaltyText}>By Scanning the QR</Text>
-        <View style={styles.qrCodeSection}>
-          <QrCode userId={phone} />
-
+          <Text style={styles.loyaltyText}>
+            Collect Stars and Earn Rewards!
+          </Text>
+          <Text style={styles.loyaltyText}>By Scanning the QR</Text>
+          <View style={styles.qrCodeSection}>
+            <QrCode userId={phone} />
+          </View>
+          {phone && <Text style={styles.phoneText}>Phone: {phone}</Text>}
         </View>
-        {phone && <Text style={styles.phoneText}>Phone: {phone}</Text>}
-        
-        </View>
-      <View style={styles.detailContainer}>
-        
+        <View style={styles.detailContainer}>
+          <Text style={styles.rewardTierText}>
+            Your Reward Tier: {getRewardTier(totalLoyaltyPoints)}
+          </Text>
 
-        
-        <Text style={styles.rewardTierText}>
-          Your Reward Tier: {getRewardTier(totalLoyaltyPoints)}
-        </Text>
+          {/* Progress Bar for Loyalty Points */}
+          <Progress.Bar
+            progress={totalLoyaltyPoints / 200}
+            width={300}
+            height={15}
+            color={progressBarColor(totalLoyaltyPoints)}
+            borderRadius={10}
+          />
 
-        {/* Progress Bar for Loyalty Points */}
-        <Progress.Bar
-          progress={totalLoyaltyPoints / 200}
-          width={300}
-          height={15}
-          color={progressBarColor(totalLoyaltyPoints)}
-          borderRadius={10}
-        />
-
-        <View style={styles.progressLabels}>
-          <Text>0</Text>
-          <Text>50</Text>
-          <Text>100</Text>
-          <Text>200</Text>
+          <View style={styles.progressLabels}>
+            <Text>0</Text>
+            <Text>50</Text>
+            <Text>100</Text>
+            <Text>200</Text>
+          </View>
         </View>
       </View>
-    </View>
-      
     </View>
   );
 };
@@ -128,8 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f0f0f0",
-    paddingVertical: 20,
-
+  
   },
   container: {
     alignItems: "center",
@@ -141,26 +141,25 @@ const styles = StyleSheet.create({
   },
 
   detailContainer: {
-    shadowColor: '#000',
-   
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 5,
     backgroundColor: "#1E3E62",
-    padding: 20,
+   
+    padding: 10,
     borderRadius: 10,
     marginBottom: 20,
-    width: "95%",
+    width: "100%",
   },
   qrCodeSection: {
-
-    justifyContent  : 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#1E3E62",
-     paddingVertical: 30,
-     marginTop: 20,
-   
+    paddingVertical: 30,
+    marginTop: 20,
+
     borderRadius: 10,
     elevation: 4,
     marginBottom: 20,
@@ -189,7 +188,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
-    
   },
   loaderContainer: {
     flex: 1,

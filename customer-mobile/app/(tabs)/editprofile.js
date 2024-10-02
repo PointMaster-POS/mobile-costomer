@@ -63,6 +63,8 @@ export default function EditProfile({ route, navigation }) {
         message: "Profile Updated!",
         description: "Your profile has been updated successfully.",
         type: "success",
+        color: "#fff",
+        backgroundColor : "#FF6500",
       });
 
       navigation.goBack();

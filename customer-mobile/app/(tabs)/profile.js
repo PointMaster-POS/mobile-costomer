@@ -110,7 +110,7 @@ export default function CustomerProfile({ navigation }) {
             });
           }}
         >
-          <FontAwesome name="edit" size={20} color="#C8ACD6" />
+          <FontAwesome name="edit" size={20} color="#fff" />
           <Text style={styles.buttonText}> Edit Profile</Text>
         </TouchableOpacity>
       </View>
@@ -120,7 +120,7 @@ export default function CustomerProfile({ navigation }) {
           style={styles.button}
           onPress={() => setModalVisible(true)} // Show modal when logout button is clicked
         >
-          <FontAwesome name="sign-out" size={20} color="#C8ACD6" />
+          <FontAwesome name="sign-out" size={20} color="#fff" />
           <Text style={styles.buttonText}> Logout</Text>
         </TouchableOpacity>
       </View>
@@ -167,12 +167,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#0B192C",
     padding: 20,
   },
   detailContainer: {
     alignItems: "center",
-    backgroundColor: "#f7f9fc",
+    backgroundColor: "#1E3E62",
     elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 26,
     fontWeight: "bold",
-    color: "#343a40",
+    color: "#fff",
     marginBottom: 10,
   },
   email: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: "row",
-    backgroundColor: "#2E236C",
+    backgroundColor: "#FF6500",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: "#C8ACD6",
+    color: "#fff",
     fontWeight: "bold",
   },
   logoutContainer: {
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   modalButton: {
-    backgroundColor: "#2E236C",
+    backgroundColor: "#FF6500",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     fontSize: 18,
-    color: "#C8ACD6",
+    color: "#fff",
     fontWeight: "bold",
   },
 });
