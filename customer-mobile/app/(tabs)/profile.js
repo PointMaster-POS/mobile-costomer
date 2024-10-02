@@ -85,6 +85,7 @@ export default function CustomerProfile({ navigation }) {
         <Image
           style={styles.profileImage}
           source={{
+            //add image in assets forler
             uri: customer.photo_url,
           }}
         />
