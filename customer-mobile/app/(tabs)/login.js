@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
+    color : "#FFFFFF"
   },
   headerText: {
     fontSize: 30,

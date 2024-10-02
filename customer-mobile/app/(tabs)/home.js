@@ -52,7 +52,7 @@ function Home() {
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
         headerStyle: {
-          backgroundColor: '#1E3E62', // Set the header background color
+          backgroundColor: '#0B192C', // Set the header background color
         },
         headerTintColor: '#fff', // Set the header text and icon color
         headerTitleStyle: {

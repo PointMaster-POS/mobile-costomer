@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-    backgroundColor: "#f7f9fc",
+    backgroundColor: "#0B192C",
     padding: 20,
 
     width: "100%",
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 5,
-    backgroundColor: "#fff",
+    backgroundColor: "#1E3E62",
     padding: 20,
     borderRadius: 10,
     marginBottom: 20,
@@ -168,20 +168,20 @@ const styles = StyleSheet.create({
   phoneText: {
     marginTop: 15,
     fontSize: 16,
-    color: "#333",
+    color: "white",
     textAlign: "center",
   },
   loyaltyText: {
     marginTop: 20,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#433D8B",
+    color: "white",
     textAlign: "center",
   },
   rewardTierText: {
     marginVertical: 15,
     fontSize: 16,
-    color: "#333",
+    color: "white",
     textAlign: "center",
   },
   progressLabels: {
@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
+    
   },
   loaderContainer: {
     flex: 1,
