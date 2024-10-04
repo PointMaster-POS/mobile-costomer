@@ -108,7 +108,7 @@ const ShopDetail = ({ route }) => {
           <View style={styles.shopCard}>
             <Image
               style={styles.shopImage}
-              source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7WO9hLoMr9HvSHz-N1cf_vHMoKYaRDXqgxA&s' }}
+              source={{ uri: shopData.logo_url }}
             />
             <View style={styles.shopCardContent}>
               {console.log("Shop Data:", shopData.business_name)}

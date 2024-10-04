@@ -13,6 +13,7 @@ export default function ShopCard({ navigation, shop }) {
   //when click on shopcard make navigation to shopdetail view
   const goToShopDetail = (businessID) => {
     return () => {
+      console.log(shop);
       navigation.navigate("ShopDetail", { businessID });
     };
   };

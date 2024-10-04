@@ -2,14 +2,15 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserContext } from "../context/userContext";
-import { View, Text, StyleSheet, Image, TouchableOpacity, Modal } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, ScrollView, RefreshControl } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 export default function CustomerProfile({ navigation }) {
   const [customer, setCustomer] = useState({});
   const { setUser, isLogged } = useContext(UserContext);
   const [phone, setPhone] = useState("");
-  const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
+  const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false); // State to control the refresh
 
   const getCustomerDetails = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
@@ -73,6 +74,13 @@ export default function CustomerProfile({ navigation }) {
     }
   }, [isLogged, phone]);
 
+  // Handle pull to refresh action
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await getCustomerDetails(); // Fetch updated data
+    setRefreshing(false); // Stop refreshing after data is loaded
+  };
+
   // Function to handle logout action
   const handleLogout = async () => {
     await AsyncStorage.removeItem("accessToken");
@@ -80,12 +88,16 @@ export default function CustomerProfile({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <View style={styles.detailContainer}>
         <Image
           style={styles.profileImage}
           source={{
-            //add image in assets forler
             uri: customer.photo_url,
           }}
         />
@@ -118,7 +130,7 @@ export default function CustomerProfile({ navigation }) {
       <View style={styles.logoutContainer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setModalVisible(true)} // Show modal when logout button is clicked
+          onPress={() => setModalVisible(true)}
         >
           <FontAwesome name="sign-out" size={20} color="#fff" />
           <Text style={styles.buttonText}> Logout</Text>
@@ -130,7 +142,7 @@ export default function CustomerProfile({ navigation }) {
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Close modal on back button press
+        onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -143,14 +155,14 @@ export default function CustomerProfile({ navigation }) {
                 style={styles.modalButton}
                 onPress={() => {
                   setModalVisible(false);
-                  handleLogout(); // Perform logout
+                  handleLogout();
                 }}
               >
                 <Text style={styles.modalButtonText}>Yes</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => setModalVisible(false)} // Close modal if No is selected
+                onPress={() => setModalVisible(false)}
               >
                 <Text style={styles.modalButtonText}>No</Text>
               </TouchableOpacity>
@@ -158,13 +170,13 @@ export default function CustomerProfile({ navigation }) {
           </View>
         </View>
       </Modal>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: "center",
     justifyContent: "top",
     backgroundColor: "#0B192C",

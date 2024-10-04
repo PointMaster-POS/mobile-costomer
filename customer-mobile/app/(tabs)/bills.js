@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Modal,
+  RefreshControl,
 } from "react-native";
 import BillModel from "../components/billmodal";
 import axios from "axios";
@@ -16,23 +17,27 @@ export default function BillScreen({ navigation }) {
   const [billDetails, setBillDetails] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
+  const [refreshing, setRefreshing] = useState(false); // Added refreshing state
 
   // Fetch Bill Details from API
   const getBillDetails = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
     try {
-      const response = await axios.get(
-        "http://localhost:3004/bills",
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await axios.get("http://localhost:3004/bills", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       setBillDetails(response.data);
     } catch (error) {
       console.error("Error fetching bills:", error.message);
     }
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true); // Set refreshing to true when pull-to-refresh is triggered
+    await getBillDetails(); // Fetch new data
+    setRefreshing(false); // Set refreshing to false when data is fetched
   };
 
   useEffect(() => {
@@ -77,6 +82,13 @@ export default function BillScreen({ navigation }) {
               </View>
             </TouchableOpacity>
           )}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing} // Pass the refreshing state
+              onRefresh={handleRefresh} // Trigger handleRefresh when pulled
+              colors={["#FF6500"]} // Customize the refresh control color
+            />
+          }
         />
       </View>
       {selectedBill && (
@@ -93,11 +105,9 @@ export default function BillScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0B192C", 
+    backgroundColor: "#0B192C",
     alignItems: "center",
     justifyContent: "top",
-   
-   
   },
   tableContainer: {
     width: "95%",
@@ -112,8 +122,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#1E3E62",
     margin: 10,
     height: "95%",
-
-
   },
   tableHeader: {
     flexDirection: "row",
@@ -122,11 +130,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6500",
     borderTopWidth: 1,
     borderBottomWidth: 1,
- 
-
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    
   },
   tableHeaderText: {
     flex: 1,
@@ -142,7 +147,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderBottomWidth: 1,
     borderColor: "#FF6500",
-
   },
   tableCell: {
     flex: 1,
@@ -151,7 +155,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   evenRow: {
-    backgroundColor: "#1E3E62"
+    backgroundColor: "#1E3E62",
   },
   oddRow: {
     backgroundColor: "#2a5789",

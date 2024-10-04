@@ -11,7 +11,9 @@ import AboutShop from './app/(tabs)/aboutshop';
 import { showMessage } from "react-native-flash-message";
 import { UserContextProvider } from './app/context/userContext';
 import FlashMessage from "react-native-flash-message";
+import { LogBox } from 'react-native';
 
+LogBox.ignoreAllLogs(true);
 const Stack = createNativeStackNavigator();
 
 export default function App() {
