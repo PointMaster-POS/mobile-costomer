@@ -12,7 +12,7 @@ export default function ShopsScreen({ navigation }) {
   const getShops = async () => {
     const accessToken = await AsyncStorage.getItem('accessToken');
     try {
-      const response = await axios.get('http://localhost:3004/shop', {
+      const response = await axios.get('http://209.97.173.123:3004/shop', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

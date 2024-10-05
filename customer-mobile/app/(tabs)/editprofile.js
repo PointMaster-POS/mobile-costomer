@@ -49,7 +49,7 @@ export default function EditProfile({ route, navigation }) {
       console.log("Data:", data);
 
       const response = await axios.put(
-        "http://localhost:3004/customer",
+        "http://209.97.173.123:3004/customer",
         JSON.stringify(data),
         {
           headers: {

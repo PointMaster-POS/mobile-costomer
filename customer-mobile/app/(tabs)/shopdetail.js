@@ -30,7 +30,7 @@ const ShopDetail = ({ route }) => {
   const getShopData = async () => {
     const shopId = route.params.businessID;
     try {
-      const response = await axios.get(`http://localhost:3004/shop/${shopId}`)
+      const response = await axios.get(`http://209.97.173.123:3004/shop/${shopId}`)
       setShopData(response.data);
     } catch (error) {
       console.error("Error fetching shop data:", error.message);
@@ -45,7 +45,7 @@ const ShopDetail = ({ route }) => {
     const accessToken = await AsyncStorage.getItem("accessToken");
     try {
       const response = await axios.get(
-        `http://localhost:3004/bills/business/${shopId}`,
+        `http://209.97.173.123:3004/bills/business/${shopId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

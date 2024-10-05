@@ -23,7 +23,7 @@ export default function BillScreen({ navigation }) {
   const getBillDetails = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
     try {
-      const response = await axios.get("http://localhost:3004/bills", {
+      const response = await axios.get("http://209.97.173.123:3004/bills", {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

@@ -20,7 +20,7 @@ export default function BillModel({
     try {
       //get bill by bill id
       const response = await axios.get(
-        `http://localhost:3004/bills/${selectedBill.bill_id}`,
+        `http://209.97.173.123:3004/bills/${selectedBill.bill_id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

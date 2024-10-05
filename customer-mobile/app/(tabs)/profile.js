@@ -52,7 +52,7 @@ export default function CustomerProfile({ navigation }) {
     console.log("Phone:", phone);
     try {
       const response = await axios.get(
-        `http://localhost:3004/customer/${phone}`,
+        `http://209.97.173.123:3004/customer/${phone}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

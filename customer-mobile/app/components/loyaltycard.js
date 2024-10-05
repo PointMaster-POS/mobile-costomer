@@ -10,7 +10,7 @@ export default function LoyaltyCard({ businessID }) {
     // Fetch loyalty details of the business
     const fetchLoyaltyDetails = async () => {
         try {
-            const response = await axios.get(`http://localhost:3004/loyalty/loyalty-program/${businessID}`);
+            const response = await axios.get(`http://209.97.173.123:3004/loyalty/loyalty-program/${businessID}`);
             console.log('Loyalty Details:', response.data);
             setLoyaltyDetails(response.data);
         } catch (error) {
