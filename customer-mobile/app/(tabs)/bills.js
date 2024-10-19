@@ -12,6 +12,7 @@ import BillModel from "../components/billmodal";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment"; // For formatting date
+import { customerUrl } from "../../url";
 
 export default function BillScreen({ navigation }) {
   const [billDetails, setBillDetails] = useState([]);
@@ -22,8 +23,9 @@ export default function BillScreen({ navigation }) {
   // Fetch Bill Details from API
   const getBillDetails = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
+    const url = customerUrl;
     try {
-      const response = await axios.get("http://209.97.173.123:3004/bills", {
+      const response = await axios.get(`${url}/bills`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -77,8 +79,12 @@ export default function BillScreen({ navigation }) {
               >
                 <Text style={styles.tableCell}>{item.bill_id}</Text>
                 <Text style={styles.tableCell}>{item.business_name}</Text>
-                <Text style={styles.tableCell}>{formatDate(item.date_time)}</Text>
-                <Text style={styles.tableCell}>{formatCurrency(item.total_price)}</Text>
+                <Text style={styles.tableCell}>
+                  {formatDate(item.date_time)}
+                </Text>
+                <Text style={styles.tableCell}>
+                  {formatCurrency(item.total_price)}
+                </Text>
               </View>
             </TouchableOpacity>
           )}
@@ -114,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 10,
     elevation: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 8,

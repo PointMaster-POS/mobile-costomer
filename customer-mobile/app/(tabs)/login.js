@@ -2,15 +2,15 @@ import React, { useState , useContext} from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-
 import { UserContext } from "../context/userContext";
 import AsyncStorage  from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
-
 import axios from "axios";
+import { authUrl } from "../../url";
 
 const LoginScreen = () => {
   const { setIsLogged} = useContext(UserContext);
+  const url = authUrl;
 
   const navigation = useNavigation();
 
@@ -25,7 +25,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://209.97.173.123:3002/customer/login", {
+      const response = await axios.post(`${url}/customer/login`, {
         email,
         password,
       });

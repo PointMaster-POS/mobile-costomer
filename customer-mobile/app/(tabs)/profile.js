@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserContext } from "../context/userContext";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, ScrollView, RefreshControl } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { customerUrl } from "../../url";
 
 export default function CustomerProfile({ navigation }) {
   const [customer, setCustomer] = useState({});
@@ -50,9 +51,10 @@ export default function CustomerProfile({ navigation }) {
 
     getPhone();
     console.log("Phone:", phone);
+    const url = customerUrl;
     try {
       const response = await axios.get(
-        `http://209.97.173.123:3004/customer/${phone}`,
+        `${url}/customer/${phone}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

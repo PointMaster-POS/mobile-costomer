@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
 import * as ImagePicker from "expo-image-picker"; 
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { customerUrl } from "../../url";
 
 export default function EditProfile({ route, navigation }) {
   const [name, setName] = useState(route.params.name);
@@ -47,9 +48,10 @@ export default function EditProfile({ route, navigation }) {
         photo_url: newProfileImage ? newProfileImage : profileImage,
       };
       console.log("Data:", data);
+      const url = customerUrl
 
       const response = await axios.put(
-        "http://209.97.173.123:3004/customer",
+        `${url}/customer`,
         JSON.stringify(data),
         {
           headers: {
