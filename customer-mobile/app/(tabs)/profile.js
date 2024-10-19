@@ -2,7 +2,16 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserContext } from "../context/userContext";
-import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, ScrollView, RefreshControl } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { customerUrl } from "../../url";
 
@@ -16,6 +25,9 @@ export default function CustomerProfile({ navigation }) {
   const getCustomerDetails = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
 
+    // ----------------- Token decode -----------------
+
+    // get phone number from token (by decoding the token)
     const getPhone = async () => {
       try {
         const accessToken = await AsyncStorage.getItem("accessToken");
@@ -49,18 +61,20 @@ export default function CustomerProfile({ navigation }) {
       }
     };
 
+    // Fetch phone number
     getPhone();
     console.log("Phone:", phone);
+
+    // ----------------- Fetch Customer Details -----------------
+
+    // Fetch customer details
     const url = customerUrl;
     try {
-      const response = await axios.get(
-        `${url}/customer/${phone}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await axios.get(`${url}/customer/${phone}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       setCustomer(response.data);
       console.log("Customer:", response.data);
@@ -70,6 +84,7 @@ export default function CustomerProfile({ navigation }) {
     }
   };
 
+  // Fetch customer details when the component is mounted
   useEffect(() => {
     if (isLogged) {
       getCustomerDetails();
@@ -93,10 +108,12 @@ export default function CustomerProfile({ navigation }) {
     <ScrollView
       contentContainerStyle={styles.container}
       refreshControl={
+        /* Add pull-to-refresh functionality */
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
       <View style={styles.detailContainer}>
+        {/* Display customer details */}
         <Image
           style={styles.profileImage}
           source={{
@@ -105,11 +122,14 @@ export default function CustomerProfile({ navigation }) {
         />
         <Text style={styles.name}>{customer.customer_name}</Text>
         <Text style={styles.email}>{customer.customer_mail}</Text>
-        <Text style={styles.dob}>Date of Birth: {customer.birthday && customer.birthday.split("T")[0]}</Text>
+        <Text style={styles.dob}>
+          Date of Birth: {customer.birthday && customer.birthday.split("T")[0]}
+        </Text>
         <Text style={styles.dob}>Phone Number: {customer.customer_phone}</Text>
         <Text style={styles.dob}>Gender: {customer.gender}</Text>
       </View>
 
+      {/* Edit Profile Button */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -129,6 +149,7 @@ export default function CustomerProfile({ navigation }) {
         </TouchableOpacity>
       </View>
 
+      {/* Logout Button */}
       <View style={styles.logoutContainer}>
         <TouchableOpacity
           style={styles.button}
