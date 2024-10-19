@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal,View,Text,TouchableOpacity,StyleSheet } from 'react-native';
 
 export default function ShopBillsModal ({selectedBill,isModalVisible,setModalVisible}) {
+  // ----------------- Shop Bills Modal -----------------
   console.log("Selected Bill:", selectedBill);
     return (
         <Modal

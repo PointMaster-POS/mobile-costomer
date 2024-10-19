@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const LoyaltyProgramCard = ({ program }) => {
+  // ----------------- Loyalty Program Card -----------------
   return (
     <View style={styles.card}>
       <Text style={styles.programName}>{program.name}</Text>
@@ -10,6 +11,7 @@ const LoyaltyProgramCard = ({ program }) => {
   );
 };
 
+//styles for loyalty program card
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#f8f9fa',

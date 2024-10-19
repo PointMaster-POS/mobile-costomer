@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import { UserContext } from '../context/userContext';
 import axios from 'axios';
+import { customerUrl } from '../../url';
 
 export default function LoyaltyCard({ businessID }) {
     const [loyaltyDetails, setLoyaltyDetails] = useState(null);
@@ -9,27 +10,35 @@ export default function LoyaltyCard({ businessID }) {
 
     // Fetch loyalty details of the business
     const fetchLoyaltyDetails = async () => {
+        
+        const url = customerUrl;
         try {
-            const response = await axios.get(`http://209.97.173.123:3004/loyalty/loyalty-program/${businessID}`);
+            // Fetch loyalty details of the business
+            const response = await axios.get(`${url}/loyalty/loyalty-program/${businessID}`);
             console.log('Loyalty Details:', response.data);
             setLoyaltyDetails(response.data);
         } catch (error) {
+            // Log error message if fetching data fails
             console.error('Error fetching loyalty details:', error.message);
         } finally {
+            // Set loading to false after fetching data
             setLoading(false);
         }
     };
 
+    //----------------- Fetch Loyalty Details -----------------
     useEffect(() => {
         fetchLoyaltyDetails();
     }, []);
 
     const { user } = React.useContext(UserContext);
 
+    // Display loading indicator while fetching data
     if (loading) {
         return <ActivityIndicator size="large" color="#0000ff" />;
     }
 
+    // Display error message if loyalty details are not available
     if (!loyaltyDetails) {
         return (
             <View style={styles.container}>
@@ -89,6 +98,7 @@ export default function LoyaltyCard({ businessID }) {
     );
 }
 
+// Styles for Loyalty Card
 const styles = StyleSheet.create({
     container: {
         flex: 1,

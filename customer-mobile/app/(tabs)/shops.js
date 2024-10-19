@@ -54,8 +54,9 @@ export default function ShopsScreen({ navigation }) {
         keyExtractor={(item) => item.business_id.toString()} // Ensure the key is a string
         contentContainerStyle={{ paddingHorizontal: 20 }}
         refreshControl={
+          // Adding RefreshControl for pull-to-refresh functionality
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        } // Adding RefreshControl for pull-to-refresh
+        } 
       />
     </View>
   );
