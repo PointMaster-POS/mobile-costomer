@@ -24,7 +24,7 @@
   <h2 id="installation">Installation</h2>
   <p>To install and run the application, follow these steps:</p>
   <pre>
-      <code>git clone https://github.com/yourusername/customer-mobile-app.git</code>
+      <code>git clone git@github.com:PointMaster-POS/mobile-costomer.git</code>
       <code>cd customer-mobile-app</code>
       <code>npm install</code>
   </pre>
