@@ -46,27 +46,34 @@ const ShopDetail = ({ route }) => {
   const getBillsData = async () => {
     const shopId = route.params.businessID;
     const accessToken = await AsyncStorage.getItem("accessToken");
-    const url = customerUrl;
+  
+    console.log(customerUrl);
+    console.log("Shop ID:", shopId);
     try {
-      const response = await axios.get(
-        `${url}bills/business/${shopId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      if(response.data.length === 0){
+      const url = customerUrl.endsWith('/') ? customerUrl : `${customerUrl}/`; // Ensure URL format
+      const response = await axios.get(`${url}bills/business/${shopId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (response.data.length === 0) {
         console.log("No bills found");
+      } else {
+        setBillsData(response.data);
+        console.log("Bills Data:", response.data);
       }
-      setBillsData(response.data);
-      console.log("Bills Data:", response.data);
-     
+       
     } catch (error) {
-      console.error("Error fetching bills data:", error.message);
+      console.error("Error fetching bills data:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+      }
     }
   };
-
+  
   // ----------------- Fetch Data on Login -----------------
   useEffect(() => {
     if (isLogged) {

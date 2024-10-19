@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Modal, View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { customerUrl } from "../../url";
@@ -9,36 +9,35 @@ export default function BillModel({
   isModalVisible,
   setModalVisible,
 }) {
-  // console.log(selectedBill.bill_id);
-
-  //state to hold bill details
+  // State to hold bill details
   const [billDetails, setBillDetails] = useState({});
   const [showBillDetails, setShowBillDetails] = useState(true);
 
-  // ----------------- Fetch Bill Details -----------------
+  // Fetch Bill Details
   const getBillDetails = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
     console.log("Access Token:", accessToken);
     const url = customerUrl;
+
     try {
-      //get bill by bill id
+      // Get bill by bill id
       const response = await axios.get(`${url}/bills/${selectedBill.bill_id}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("Response at :", response.data);
+      console.log("Response at :", response.data.items);
       setBillDetails(response.data);
     } catch (error) {
       console.error("Error:", error.message);
     }
   };
 
-  //use effect to call get bill details function when nagivation is changed
+  // Use effect to call get bill details function when navigation is changed
   useEffect(() => {
-    //call get bill details function
+    // Call get bill details function
     getBillDetails();
-  }, [isModalVisible]); //re render when isModalVisible changes
+  }, [isModalVisible]); // Re-render when isModalVisible changes
 
   return (
     <Modal
@@ -52,39 +51,28 @@ export default function BillModel({
           {showBillDetails ? (
             <>
               <Text style={styles.modalTitle}>Bill Details</Text>
-              <Text style={styles.modalText}>
-                Bill ID: {billDetails.bill_id}
-              </Text>
-              <Text style={styles.modalText}>
-                Branch Name: {billDetails.branch_name}
-              </Text>
-              <Text style={styles.modalText}>
-                Time: {billDetails.date_time}
-              </Text>
-              <Text style={styles.modalText}>
-                Payement method: {billDetails.payment_method}
-              </Text>
-              <Text style={styles.modalText}>
-                Cashier Name: {billDetails.employee_name}
-              </Text>
-              <Text style={styles.modalText}>
-                Payed Amount: {billDetails.received}
-              </Text>
-              <Text style={styles.modalText}>
-                Total Amount: {billDetails.total_price}
-              </Text>
-              <Text style={styles.modalText}>
-                Status : {billDetails.status ? "completed" : "not completed"}
-              </Text>
+              <Text style={styles.modalText}>Bill ID: {billDetails.bill_id}</Text>
+              <Text style={styles.modalText}>Branch Name: {billDetails.branch_name}</Text>
+              <Text style={styles.modalText}>Time: {billDetails.date_time}</Text>
+              <Text style={styles.modalText}>Payment method: {billDetails.payment_method}</Text>
+              <Text style={styles.modalText}>Cashier Name: {billDetails.employee_name}</Text>
+              <Text style={styles.modalText}>Paid Amount: {billDetails.received}</Text>
+              <Text style={styles.modalText}>Total Amount: {billDetails.total_price}</Text>
+              <Text style={styles.modalText}>Status: {billDetails.status ? "completed" : "not completed"}</Text>
             </>
           ) : (
             <>
               <Text style={styles.modalTitle}>Bill Items</Text>
               {billDetails.items &&
                 billDetails.items.map((item, index) => (
-                  <Text key={index} style={styles.modalText}>
-                    {item.item_id} - {item.quantity} x {item.price}
-                  </Text>
+                  <View key={index} style={styles.itemContainer}>
+                    {item.image && (
+                      <Image source={{ uri: item.image }} style={styles.itemImage} />
+                    )}
+                    <Text style={styles.modalText}>
+                      {item.item_name} x  {item.quantity} 
+                    </Text>
+                  </View>
                 ))}
             </>
           )}
@@ -93,8 +81,7 @@ export default function BillModel({
             style={styles.closeButton}
           >
             <Text style={styles.closeButtonText}>
-              {" "}
-              {showBillDetails ? "View Items" : "Bill Details"} Bill Details
+              {showBillDetails ? "View Items" : "Bill Details"}
             </Text>
           </TouchableOpacity>
 
@@ -110,14 +97,12 @@ export default function BillModel({
   );
 }
 
-
-//styles
+// Styles
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    //ease annimate when height changes
   },
   modalContent: {
     width: "80%",
@@ -155,5 +140,16 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: "white",
     fontSize: 16,
+  },
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  itemImage: {
+    width: 50, // Adjust the width according to your needs
+    height: 50, // Adjust the height according to your needs
+    marginRight: 10, // Space between the image and text
+    borderRadius: 5, // Optional: To give rounded corners to the image
   },
 });
