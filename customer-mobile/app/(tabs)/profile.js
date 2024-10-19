@@ -103,7 +103,7 @@ export default function CustomerProfile({ navigation }) {
         />
         <Text style={styles.name}>{customer.customer_name}</Text>
         <Text style={styles.email}>{customer.customer_mail}</Text>
-        <Text style={styles.dob}>Date of Birth: {customer.birthday}</Text>
+        <Text style={styles.dob}>Date of Birth: {customer.birthday && customer.birthday.split("T")[0]}</Text>
         <Text style={styles.dob}>Phone Number: {customer.customer_phone}</Text>
         <Text style={styles.dob}>Gender: {customer.gender}</Text>
       </View>

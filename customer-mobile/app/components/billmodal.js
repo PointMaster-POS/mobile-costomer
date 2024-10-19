@@ -101,9 +101,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     //ease annimate when height changes
-    
-
-
 
   },
   modalContent: {
