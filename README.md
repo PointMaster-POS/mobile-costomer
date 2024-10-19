@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Mobile Application</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
-        h1, h2, h3 {
-            color: #FF6500;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        a {
-            color: #FF6500;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-    </style>
-</head>
+
 <body>
     <h1>Customer Mobile Application</h1>
     <p>This repository contains the source code for the Customer Mobile Application built using React Native.</p>
