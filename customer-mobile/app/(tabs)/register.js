@@ -6,6 +6,7 @@ import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { showMessage } from "react-native-flash-message";
 import axios from "axios";
+import { customerUrl } from "../../url";
 
 
 const RegisterScreen = () => {
@@ -23,6 +24,7 @@ const RegisterScreen = () => {
   const [date, setDate] = useState(new Date());
   const [selectedImage, setSelectedImage] = useState("");
 
+  // ----------------- Profile Images -----------------
   const customerAvatarLinks = [
     "https://firebasestorage.googleapis.com/v0/b/pointmaster-79d9a.appspot.com/o/profileImages%2F3d-illustration-human-avatar-profile_23-2150671126.avif?alt=media&token=88368021-5432-4e7d-8188-a2f86ce6e93b",
     "https://firebasestorage.googleapis.com/v0/b/pointmaster-79d9a.appspot.com/o/profileImages%2F3d-illustration-with-online-avatar_23-2151303097.avif?alt=media&token=1de48dc4-8322-4910-85f4-59350b77f635",
@@ -31,6 +33,7 @@ const RegisterScreen = () => {
     "https://firebasestorage.googleapis.com/v0/b/pointmaster-79d9a.appspot.com/o/profileImages%2Ftom.avif?alt=media&token=0f363a35-89e9-4416-a971-90cc530c9220",
   ];
 
+  // ----------------- Register Logic -----------------
   //function to handle register button press
   const handleRegister = () => {
     if (password !== confirmPassword) {
@@ -56,9 +59,12 @@ const RegisterScreen = () => {
     };
     console.log("User Data: ", userData);
 
+    const url = customerUrl;
+
+    // ----------------- Send Data to Backend -----------------
     //send data to backend
     axios
-      .post("http://localhost:3004/customer/register", userData)
+      .post(`${url}/customer/register`, userData)
       .then((response) => {
         console.log("Response: ", response.data);
         showMessage({
@@ -84,15 +90,6 @@ const RegisterScreen = () => {
       }
       );
     
-
-
-
-
-
-   
-   
-      
-   
   };
 
   return (

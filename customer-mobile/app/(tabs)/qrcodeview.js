@@ -18,6 +18,7 @@ const QRCodeView = () => {
   const [loading, setLoading] = useState(true);
   const [totalLoyaltyPoints, setTotalLoyaltyPoints] = useState(170); // Example loyalty points
 
+  // ----------------- Token decode -----------------
   // Function to get phone from AsyncStorage
   const getPhone = async () => {
     try {
@@ -52,11 +53,14 @@ const QRCodeView = () => {
     }
   };
 
+  // ----------------- Get phone number -----------------
   useEffect(() => {
     if (isLogged) {
       getPhone();
     }
   }, [isLogged]);
+
+  // ----------------- Reward Tier -----------------
 
   // Get reward tier based on points
   const getRewardTier = (points) => {
@@ -129,7 +133,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f0f0f0",
-  
   },
   container: {
     alignItems: "center",
@@ -147,7 +150,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 5,
     backgroundColor: "#1E3E62",
-   
+
     padding: 10,
     borderRadius: 10,
     marginBottom: 20,
