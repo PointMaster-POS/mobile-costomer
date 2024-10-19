@@ -30,7 +30,7 @@ export default function ShopBillsModal ({selectedBill,isModalVisible,setModalVis
     )
 }
 
-
+// ----------------- Styles -----------------
 const styles = StyleSheet.create({
     
     modalContainer: {
