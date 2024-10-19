@@ -11,14 +11,15 @@ import {
 } from "react-native";
 import ShopBillsModal from "../components/shopbillsmodal";
 import LoyaltyCard from "../components/loyaltycard";
-import { MaterialIcons } from "@expo/vector-icons"; // Importing icons from expo
+import { MaterialIcons } from "@expo/vector-icons"; 
 import { UserContext } from "../context/userContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { customerUrl } from "../../url";
 // import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 // Component to display shop details and bills
 const ShopDetail = ({ route }) => {
-  // States
+  // States to store shop and bills data
   const [shopData, setShopData] = useState({});
   const [billsData, setBillsData] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -26,26 +27,29 @@ const ShopDetail = ({ route }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { isLogged } = useContext(UserContext);
 
+  // ----------------- Fetch Shop Data -----------------
+
   // Fetch shop data from backend
   const getShopData = async () => {
+    const url = customerUrl;
     const shopId = route.params.businessID;
     try {
-      const response = await axios.get(`http://209.97.173.123:3004/shop/${shopId}`)
+      const response = await axios.get(`${url}/shop/${shopId}`)
       setShopData(response.data);
     } catch (error) {
       console.error("Error fetching shop data:", error.message);
     }
   };
 
+  // ----------------- Fetch Bills Data -----------------
   // Fetch bills data based on user ID and shop ID
   const getBillsData = async () => {
-    console.log("Fetching bills data...");
-    console.log("Shop ID:", route.params.businessID);
     const shopId = route.params.businessID;
     const accessToken = await AsyncStorage.getItem("accessToken");
+    const url = customerUrl;
     try {
       const response = await axios.get(
-        `http://209.97.173.123:3004/bills/business/${shopId}`,
+        `${url}bills/business/${shopId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -63,6 +67,7 @@ const ShopDetail = ({ route }) => {
     }
   };
 
+  // ----------------- Fetch Data on Login -----------------
   useEffect(() => {
     if (isLogged) {
       const fetchData = async () => {
@@ -73,6 +78,8 @@ const ShopDetail = ({ route }) => {
       fetchData();
     }
   }, [isLogged]);
+
+  // ----------------- Render Bill Items -----------------
 
   const renderBillItem = (item) => (
     <TouchableOpacity
@@ -161,11 +168,12 @@ const ShopDetail = ({ route }) => {
   );
 }
 
+// ----------------- Styles -----------------
 // Styles for Shop Detail Screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f9fc", // Light background for contrast
+    backgroundColor: "#f7f9fc", 
   },
   shopCard: {
     backgroundColor: '#fff',
