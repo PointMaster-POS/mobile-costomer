@@ -44,6 +44,11 @@
     <li><strong>Database Interface:</strong> The app accesses a centralized database through the backend services for retrieving and updating user data, bills, and loyalty points.</li>
     <li><strong>Hardware Interface:</strong> The app may interact with mobile device features, such as camera access for QR code scanning, to enhance user experience.</li>
 </ul>
+![Simulator Screenshot - iPhone 15 Pro - 2024-10-20 at 19 37 33](https://github.com/user-attachments/assets/54fc794a-667d-401a-9b56-fd59b340cf0a)
+
+![Simulator Screenshot - iPhone 15 Pro - 2024-10-20 at 19 37 27](https://github.com/user-attachments/assets/4504616b-8f5e-4ba8-b590-8971bdf3f31d)
+![Simulator Screenshot - iPhone 15 Pro - 2024-10-20 at 20 25 58](https://github.com/user-attachments/assets/79be4f92-76bf-4b35-baca-5d34ffc5419c)
+
 
 <h2 id="contributing">Contributing</h2>
 <p>We welcome contributions! If you would like to contribute to this project, please follow these steps:</p>
